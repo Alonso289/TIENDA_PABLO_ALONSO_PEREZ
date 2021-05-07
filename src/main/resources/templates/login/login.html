@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/loginStyle.css">
+  <title>Inicio de Sesión</title>
 </head>
 <body>
-
+  <div class="login-wrapper">
+    <form action="" class="form">
+      <img src="/img/avatar.png" alt="">
+      <h2>Inicio de Sesión</h2>
+      <div class="input-group">
+        <input type="text" name="usuario" id="usuario" required>
+        <label for="usuario">Usuario</label>
+      </div>
+      <div class="input-group">
+        <input type="clave" name="clave" id="clave" required>
+        <label for="clave">Contraseña</label>
+      </div>
+      <input type="submit" value="Login" class="submit-btn">
+      <a class="registro">Registrarse</a>
+    </form>
+  </div>
 </body>
 </html>

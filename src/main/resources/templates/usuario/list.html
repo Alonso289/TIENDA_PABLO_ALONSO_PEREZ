@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Listado Usuarios</title>
+	<th:block th:include="fragments/head.html"></th:block>
+	<link rel="stylesheet" href="/css/listStyle.css">
+</head>
+<body>
+	<table class="content-table table-striped">
+		<tr>
+			<th>Rol</th>
+			<th>Email</th>
+			<th>Clave</th>
+			<th>Nombre</th>
+			<th>Apellido 1</th>
+			<th>Apellido 2</th>
+			<th>Dirección</th>
+			<th>Provincia</th>
+			<th>Localidad</th>
+			<th>Teléfono</th>
+			<th>Dni</th>
+		</tr>
+		<tr th:each="usuario : ${lista}">
+			<td th:text="${usuario.idRol}">Rol</td>
+			<td th:text="${usuario.email}">Email</td>
+			<td th:text="${usuario.clave}">Clave</td>
+			<td th:text="${usuario.nombre}">Nombre</td>
+			<td th:text="${usuario.apellido1}">Primer Apellido</td>
+			<td th:text="${usuario.apellido2}">Segundo Apellido</td>
+			<td th:text="${usuario.direccion}">Dirección</td>
+			<td th:text="${usuario.provincia}">Provincia</td>
+			<td th:text="${usuario.localidad}">Localidad</td>
+			<td th:text="${usuario.telefono}">Telefono</td>
+			<td th:text="${usuario.dni}">DNI</td>
+			<td><a th:href="@{/usuario/edit/} + ${usuario.nombre}" th:text="'Editar'" method="get" class="btn btn-outline-primary"></a></td>		
+			<td><a th:href="@{/del/} + ${usuario.nombre}" th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
+		</tr>
+	</table>
+	<p align="right"><a th:href="@{/usuario/new}" class="btn btn-outline-primary">Añadir usuario</a></p>
+	
+</body>
+</html>

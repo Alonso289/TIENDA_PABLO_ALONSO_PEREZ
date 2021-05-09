@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="/css/listStyle.css">
 </head>
 <body>
+	<nav th:replace="fragments/navigation.html :: navigation" />
 	<table class="content-table table-striped">
 		<tr>
 			<th>Rol</th>
@@ -22,7 +23,9 @@
 			<th>Dni</th>
 		</tr>
 		<tr th:each="usuario : ${lista}">
-			<td th:text="${usuario.idRol}">Rol</td>
+		                                    <div th:each="rol : ${roles}">
+		                                    	<td th:if="${rol.id == usuario.rol}" th:text="${rol.rol}">Rol</td>
+		                                    </div>
 			<td th:text="${usuario.email}">Email</td>
 			<td th:text="${usuario.clave}">Clave</td>
 			<td th:text="${usuario.nombre}">Nombre</td>
@@ -38,6 +41,6 @@
 		</tr>
 	</table>
 	<p align="right"><a th:href="@{/usuario/new}" class="btn btn-outline-primary">Añadir usuario</a></p>
-	
+	<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

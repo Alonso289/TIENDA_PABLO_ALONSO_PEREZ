@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Nuevo Producto</title>
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<form class="form-horizontal" th:action="${producto.id !=0} ? @{/producto/edit/submit} : @{/producto/new/submit}" th:object="${producto}" method="post" >
+<fieldset>
+
+<!-- Form Name -->
+<legend th:text="${producto.id !=0} ? 'Editar producto' : 'Nuevo producto'">Nuevo producto / Editar producto</legend>
+
+<input id="id" name="id" type="hidden" placeholder="" class="form-control input-md" required="" th:field="*{id}">
+
+<!-- Text input CATEGORIA-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="id_categoria">Categoria</label>  
+  <div class="col-md-4">
+  <input id="id_categoria" th:field="*{id_categoria}" name="id_categoria" type="text" placeholder="" class="form-control input-md" required="" >    
+  </div>
+</div>
+
+<!-- Text input NOMBRE-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nombre">Nombre</label>  
+  <div class="col-md-4">
+  <input id="nombre" th:field="*{nombre}" name="nombre" type="text" placeholder="" class="form-control input-md" required="" >    
+  </div>
+</div>
+
+<!-- Text input DESCRIPCION-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="clave">DESCRIPCION</label>  
+  <div class="col-md-4">
+  <input id="descripcion" th:field="*{descripcion}" name="descripcion" type="text" placeholder="" class="form-control input-md" required="" >    
+  </div>
+</div>
+
+<!-- Text input PRECIO-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="precio">Precio</label>  
+  <div class="col-md-4">
+  <input id="precio" th:field="*{precio}" name="precio" type="text" placeholder="" class="form-control input-md" required="" >    
+  </div>
+</div>
+
+<!-- Text input STOCK-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="stock">Stock</label>  
+  <div class="col-md-4">
+  <input id="stock" th:field="*{stock}" name="stock" type="text" placeholder="" class="form-control input-md" required="" >    
+  </div>
+</div>
+
+<!-- Text input FECHA_ALTA-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="fecha_alta">Fecha Alta</label>  
+  <div class="col-md-4">
+  <input id="fecha_alta" th:field="*{fecha_alta}" name="fecha_alta" type="text" placeholder="" class="form-control input-md" required="">   
+  </div>
+</div>
+
+<!-- Text input FECHA_BAJA-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="direccion">Fecha Baja</label>  
+  <div class="col-md-4">
+  <input id="fecha_baja" th:field="*{fecha_baja}" name="fecha_baja" type="text" placeholder="" class="form-control input-md" required="">   
+  </div>
+</div>
+
+<!-- Text input IMPUESTO-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="impuesto">Impuesto</label>  
+  <div class="col-md-4">
+  <input id="impuesto" th:field="*{impuesto}" name="impuesto" type="text" placeholder="" class="form-control input-md" required="">   
+  </div>
+</div>
+
+<!-- Text input IMAGEN-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="direccion">Fecha Baja</label>  
+  <div class="col-md-4">
+  <input id="fecha_baja" th:field="*{fecha_baja}" name="fecha_baja" type="text" placeholder="" class="form-control input-md" required="">   
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button th:text="${producto.id !=0} ? 'Guardar' : 'Crear'" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar / Crear</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</body>
+</html>

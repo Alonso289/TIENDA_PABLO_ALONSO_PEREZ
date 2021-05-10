@@ -18,20 +18,21 @@ import curso.java.tienda.service.UsuarioService;
 @RequestMapping("")
 public class LoginController {
 
+	@Autowired
 	private UsuarioService us;
 
-	@GetMapping("login/login")
-	public String editSubmit(Model model, @ModelAttribute Usuario usuario) {
+	@GetMapping("/login")
+	public String login(Model model) {
 		return "/login/login";
 	}
 
-	@PostMapping("/acceso/validar")
+	@PostMapping("/login/acceso/validar")
 	public String validarAcceso(HttpSession sesion, Model model, @RequestParam(required = true) String email,
-			@RequestParam(required = true) String password) {
+			@RequestParam(required = true) String clave) {
 
-		Usuario usuario = us.validarLogin(email, password);
+		Usuario usuario = us.validarLogin(email, clave);
 		sesion.setAttribute("usuario", usuario);
 
-		return "login/login";
+		return "redirect:/";
 	}
 }

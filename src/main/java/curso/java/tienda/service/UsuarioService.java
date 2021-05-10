@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.repository.UsuarioRepository;
-import util.Data;
+
+import java.util.ArrayList;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -16,9 +17,12 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
 	public Iterable<Usuario> getListaUsuarios() {
-		
-		return Data.listaUsuarios();
-		//return usuarioRepository.findAll();
+
+		return usuarioRepository.findAll();
+	}
+
+	public void saveListaUsuarios(ArrayList<Usuario> lista) {
+		usuarioRepository.saveAll(lista);
 	}
 
 	public void addUsuario(Usuario usuario) {
@@ -49,13 +53,13 @@ public class UsuarioService {
 		return usuarioRepository.findByEmail(email);
 	}
 
-	public Usuario validarLogin(String email, String password) {
+	public Usuario validarLogin(String email, String clave) {
 
 		Usuario usuario = getUsuario(email);
 
 		if (usuario != null) {
 
-			if (compruebaCredenciales(usuario, password)) {
+			if (compruebaCredenciales(usuario, clave)) {
 
 				return usuario;
 			}
@@ -70,17 +74,18 @@ public class UsuarioService {
 	}
 
 	// COMPRUEBA CREDENCIALES DE UN USUARIO
-	public static boolean compruebaCredenciales(Usuario usuario, String passIntro) {
+	public static boolean compruebaCredenciales(Usuario usuario, String claveIntro) {
 		// ENCRIPTA LAS PASS
 		Base64 base64 = new Base64();
-		passIntro = new String(base64.encode(passIntro.getBytes()));
+		claveIntro = new String(base64.encode(claveIntro.getBytes()));
 		boolean correcto = false;
 
-		String passBd = new String(base64.encode(usuario.getClave().getBytes()));
+		String claveBd = new String(base64.encode(usuario.getClave().getBytes()));
 
-		if (passIntro.equals(passBd))
+		if (claveIntro.equals(claveBd))
 			correcto = true;
 
 		return correcto;
 	}
+
 }

@@ -30,7 +30,7 @@
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-				<div class="col" th:each="producto : ${listaProductos}">
+				<div class="col">
 					<div class="card shadow-sm">
 
 						<img th:src="@{/img/}+${producto.imagen}" />
@@ -39,7 +39,7 @@
 								del producto.</p>
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-								    <a th:href="@{/producto/verProducto/} + ${producto.nombre}" th:text="'Ver'" method="get" class="btn btn-sm btn-outline-secondary"></a>
+									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
 									<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
 								</div>
 								<small class="text-muted"

@@ -1,173 +1,200 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Nuevo usuario</title>
-	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Nuevo usuario</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
 
-<form class="form-horizontal" th:action="${usuario.id !=0} ? @{/usuario/edit/submit} : @{/usuario/new/submit}" th:object="${usuario}" method="post" >
-<fieldset>
+	<form class="form-horizontal"
+		th:action="${usuario.id !=0} ? @{/usuario/edit/submit} : @{/usuario/new/submit}"
+		th:object="${usuario}" method="post">
+		<fieldset>
 
-<!-- Form Name -->
-<legend th:text="${usuario.id !=0} ? 'Editar usuario' : 'Nuevo usuario'">Nuevo usuario / Editar usuario</legend>
+			<!-- Form Name -->
+			<legend
+				th:text="${usuario.id !=0} ? 'Editar usuario' : 'Nuevo usuario'">Nuevo
+				usuario / Editar usuario</legend>
 
-<input id="id" name="id" type="hidden" placeholder="" class="form-control input-md" required="" th:field="*{id}">
+			<input id="id" name="id" type="hidden" placeholder=""
+				class="form-control input-md" required="" th:field="*{id}">
 
-<!-- Text input ROL-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="idRol">Rol</label>  
-  <div class="col-md-4">
-  <input id="idRol" th:field="*{idRol}" name="idRol" type="text" placeholder="" class="form-control input-md" required="" >    
-  </div>
-</div>
+			<!-- Text input ROL-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="id_rol">Rol</label>
+				<div class="col-md-4">
 
-<!-- Text input EMAIL-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="email">Email</label>  
-  <div class="col-md-4">
-  <input id="email" th:field="*{email}" name="email" type="text" placeholder="" class="form-control input-md" required="" >    
-  </div>
-</div>
+					<select id="id_rol" th:field="*{id_rol}" name="id_rol">
+						<option th:each="rol : ${listaRoles}" th:value="${rol.id}"
+							th:text="${rol.rol}"></option>
+					</select>
+				</div>
+			</div>
+			<!-- Text input EMAIL-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="email">Email</label>
+				<div class="col-md-4">
+					<input id="email" th:field="*{email}" name="email" type="text"
+						placeholder="" class="form-control input-md" required="">
+				</div>
+			</div>
 
-<!-- Text input CLAVE-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="clave">Clave</label>  
-  <div class="col-md-4">
-  <input id="clave" th:field="*{clave}" name="clave" type="text" placeholder="" class="form-control input-md" required="" >    
-  </div>
-</div>
+			<!-- Text input CLAVE-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="clave">Clave</label>
+				<div class="col-md-4">
+					<input id="clave" th:field="*{clave}" name="clave" type="text"
+						placeholder="" class="form-control input-md" required="">
+				</div>
+			</div>
 
-<!-- Text input NOMBRE-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="nombre">Nombre</label>  
-  <div class="col-md-4">
-  <input id="nombre" th:field="*{nombre}" name="nombre" type="text" placeholder="" class="form-control input-md" required="" >
-    
-  </div>
-</div>
+			<!-- Text input NOMBRE-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="nombre">Nombre</label>
+				<div class="col-md-4">
+					<input id="nombre" th:field="*{nombre}" name="nombre" type="text"
+						placeholder="" class="form-control input-md" required="">
 
-<!-- Text input APELLIDO1-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="apellido1">Primer Apellido</label>  
-  <div class="col-md-4">
-  <input id="apellido1" th:field="*{apellido1}" name="apellido1" type="text" placeholder="" class="form-control input-md" required="" >    
-  </div>
-</div>
+				</div>
+			</div>
 
-<!-- Text input APELLIDO2-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="apellido2">Segundo Apellido</label>  
-  <div class="col-md-4">
-  <input id="apelllido2" th:field="*{apellido2}" name="apellido2" type="text" placeholder="" class="form-control input-md" required="">   
-  </div>
-</div>
+			<!-- Text input APELLIDO1-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="apellido1">Primer
+					Apellido</label>
+				<div class="col-md-4">
+					<input id="apellido1" th:field="*{apellido1}" name="apellido1"
+						type="text" placeholder="" class="form-control input-md"
+						required="">
+				</div>
+			</div>
 
-<!-- Text input DIRECCION-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="direccion">DIRECCION</label>  
-  <div class="col-md-4">
-  <input id="direccion" th:field="*{direccion}" name="direccion" type="text" placeholder="" class="form-control input-md" required="">   
-  </div>
-</div>
+			<!-- Text input APELLIDO2-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="apellido2">Segundo
+					Apellido</label>
+				<div class="col-md-4">
+					<input id="apelllido2" th:field="*{apellido2}" name="apellido2"
+						type="text" placeholder="" class="form-control input-md"
+						required="">
+				</div>
+			</div>
 
-<!-- Text input PROVINCIA-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="provincia">Provincia</label>  
-  <div class="col-md-4">
-  <select id="provincia" th:field="*{provincia}" required="" name="provincia" type="text" class="form-control">
-					<option value="">Elige Provincia</option>
-					<option value="Álava/Araba">Álava/Araba</option>
-					<option value="Albacete">Albacete</option>
-					<option value="Alicante">Alicante</option>
-					<option value="Almería">Almería</option>
-					<option value="Asturias">Asturias</option>
-					<option value="Ávila">Ávila</option>
-					<option value="Badajoz">Badajoz</option>
-					<option value="Baleares">Baleares</option>
-					<option value="Barcelona">Barcelona</option>
-					<option value="Burgos">Burgos</option>
-					<option value="Cáceres">Cáceres</option>
-					<option value="Cádiz">Cádiz</option>
-					<option value="Cantabria">Cantabria</option>
-					<option value="Castellón">Castellón</option>
-					<option value="Ceuta">Ceuta</option>
-					<option value="Ciudad Real">Ciudad Real</option>
-					<option value="Córdoba">Córdoba</option>
-					<option value="Cuenca">Cuenca</option>
-					<option value="Gerona/Girona">Gerona/Girona</option>
-					<option value="Granada">Granada</option>
-					<option value="Guadalajara">Guadalajara</option>
-					<option value="Guipúzcoa/Gipuzkoa">Guipúzcoa/Gipuzkoa</option>
-					<option value="Huelva">Huelva</option>
-					<option value="Huesca">Huesca</option>
-					<option value="Jaén">Jaén</option>
-					<option value="La Coruña/A Coruña">La Coruña/A Coruña</option>
-					<option value="La Rioja">La Rioja</option>
-					<option value="Las Palmas">Las Palmas</option>
-					<option value="León">León</option>
-					<option value="Lérida/Lleida">Lérida/Lleida</option>
-					<option value="Lugo">Lugo</option>
-					<option value="Madrid">Madrid</option>
-					<option value="Málaga">Málaga</option>
-					<option value="Melilla">Melilla</option>
-					<option value="Murcia">Murcia</option>
-					<option value="Navarra">Navarra</option>
-					<option value="Orense/Ourense">Orense/Ourense</option>
-					<option value="Palencia">Palencia</option>
-					<option value="Pontevedra">Pontevedra</option>
-					<option value="Salamanca">Salamanca</option>
-					<option value="Segovia">Segovia</option>
-					<option value="Sevilla">Sevilla</option>
-					<option value="Soria">Soria</option>
-					<option value="Tarragona">Tarragona</option>
-					<option value="Tenerife">Tenerife</option>
-					<option value="Teruel">Teruel</option>
-					<option value="Toledo">Toledo</option>
-					<option value="Valencia">Valencia</option>
-					<option value="Valladolid">Valladolid</option>
-					<option value="Vizcaya/Bizkaia">Vizcaya/Bizkaia</option>
-					<option value="Zamora">Zamora</option>
-					<option value="Zaragoza">Zaragoza</option>
-					</select>    
-  </div>
-</div>
+			<!-- Text input DIRECCION-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="direccion">DIRECCION</label>
+				<div class="col-md-4">
+					<input id="direccion" th:field="*{direccion}" name="direccion"
+						type="text" placeholder="" class="form-control input-md"
+						required="">
+				</div>
+			</div>
 
-<!-- Text input LOCALIDAD-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="localidad">Localidad</label>  
-  <div class="col-md-4">
-  <input id="localidad" th:field="*{localidad}" name="localidad" type="text" placeholder="" class="form-control input-md" required="" >   
-  </div>
-</div>
+			<!-- Text input PROVINCIA-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="provincia">Provincia</label>
+				<div class="col-md-4">
+					<select id="provincia" th:field="*{provincia}" required=""
+						name="provincia" type="text" class="form-control">
+						<option value="">Elige Provincia</option>
+						<option value="Álava/Araba">Álava/Araba</option>
+						<option value="Albacete">Albacete</option>
+						<option value="Alicante">Alicante</option>
+						<option value="Almería">Almería</option>
+						<option value="Asturias">Asturias</option>
+						<option value="Ávila">Ávila</option>
+						<option value="Badajoz">Badajoz</option>
+						<option value="Baleares">Baleares</option>
+						<option value="Barcelona">Barcelona</option>
+						<option value="Burgos">Burgos</option>
+						<option value="Cáceres">Cáceres</option>
+						<option value="Cádiz">Cádiz</option>
+						<option value="Cantabria">Cantabria</option>
+						<option value="Castellón">Castellón</option>
+						<option value="Ceuta">Ceuta</option>
+						<option value="Ciudad Real">Ciudad Real</option>
+						<option value="Córdoba">Córdoba</option>
+						<option value="Cuenca">Cuenca</option>
+						<option value="Gerona/Girona">Gerona/Girona</option>
+						<option value="Granada">Granada</option>
+						<option value="Guadalajara">Guadalajara</option>
+						<option value="Guipúzcoa/Gipuzkoa">Guipúzcoa/Gipuzkoa</option>
+						<option value="Huelva">Huelva</option>
+						<option value="Huesca">Huesca</option>
+						<option value="Jaén">Jaén</option>
+						<option value="La Coruña/A Coruña">La Coruña/A Coruña</option>
+						<option value="La Rioja">La Rioja</option>
+						<option value="Las Palmas">Las Palmas</option>
+						<option value="León">León</option>
+						<option value="Lérida/Lleida">Lérida/Lleida</option>
+						<option value="Lugo">Lugo</option>
+						<option value="Madrid">Madrid</option>
+						<option value="Málaga">Málaga</option>
+						<option value="Melilla">Melilla</option>
+						<option value="Murcia">Murcia</option>
+						<option value="Navarra">Navarra</option>
+						<option value="Orense/Ourense">Orense/Ourense</option>
+						<option value="Palencia">Palencia</option>
+						<option value="Pontevedra">Pontevedra</option>
+						<option value="Salamanca">Salamanca</option>
+						<option value="Segovia">Segovia</option>
+						<option value="Sevilla">Sevilla</option>
+						<option value="Soria">Soria</option>
+						<option value="Tarragona">Tarragona</option>
+						<option value="Tenerife">Tenerife</option>
+						<option value="Teruel">Teruel</option>
+						<option value="Toledo">Toledo</option>
+						<option value="Valencia">Valencia</option>
+						<option value="Valladolid">Valladolid</option>
+						<option value="Vizcaya/Bizkaia">Vizcaya/Bizkaia</option>
+						<option value="Zamora">Zamora</option>
+						<option value="Zaragoza">Zaragoza</option>
+					</select>
+				</div>
+			</div>
 
-<!-- Text input TELEFONO-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="telefono">Telefono</label>  
-  <div class="col-md-4">
-  <input id="telefono" th:field="*{telefono}" name="telefono" type="text" placeholder="" class="form-control input-md" required="" >   
-  </div>
-</div>
+			<!-- Text input LOCALIDAD-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="localidad">Localidad</label>
+				<div class="col-md-4">
+					<input id="localidad" th:field="*{localidad}" name="localidad"
+						type="text" placeholder="" class="form-control input-md"
+						required="">
+				</div>
+			</div>
 
-<!-- Text input DNI-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="dni">DNI</label>  
-  <div class="col-md-4">
-  <input id="dni" th:field="*{dni}" name="dni" type="text" placeholder="" class="form-control input-md" required="" >
-    
-  </div>
-</div>
+			<!-- Text input TELEFONO-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="telefono">Telefono</label>
+				<div class="col-md-4">
+					<input id="telefono" th:field="*{telefono}" name="telefono"
+						type="text" placeholder="" class="form-control input-md"
+						required="">
+				</div>
+			</div>
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="singlebutton"></label>
-  <div class="col-md-4">
-    <button th:text="${usuario.id !=0} ? 'Guardar' : 'Crear'" id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar / Crear</button>
-  </div>
-</div>
+			<!-- Text input DNI-->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="dni">DNI</label>
+				<div class="col-md-4">
+					<input id="dni" th:field="*{dni}" name="dni" type="text"
+						placeholder="" class="form-control input-md" required="">
 
-</fieldset>
-</form>
+				</div>
+			</div>
+
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="singlebutton"></label>
+				<div class="col-md-4">
+					<button th:text="${usuario.id !=0} ? 'Guardar' : 'Crear'"
+						id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar
+						/ Crear</button>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
 </body>
 </html>

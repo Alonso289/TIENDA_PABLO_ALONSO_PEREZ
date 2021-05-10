@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Nuevo usuario</title>
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<th:block th:include="fragments/head.html"></th:block>
+<link rel="stylesheet" href="/css/registroUsuario.css">
 </head>
 <body>
-
+<nav th:replace="fragments/navigation.html :: navigation" />
 	<form class="form-horizontal"
 		th:action="${usuario.id !=0} ? @{/usuario/edit/submit} : @{/usuario/new/submit}"
 		th:object="${usuario}" method="post">
@@ -19,13 +20,12 @@
 
 			<input id="id" name="id" type="hidden" placeholder=""
 				class="form-control input-md" required="" th:field="*{id}">
-
+<div class="datosPrimero">
 			<!-- Text input ROL-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="id_rol">Rol</label>
 				<div class="col-md-4">
-
-					<select id="id_rol" th:field="*{id_rol}" name="id_rol">
+					<select id="id_rol" th:field="*{id_rol}" required="" name="id_rol" type="text" class="form-control">
 						<option th:each="rol : ${listaRoles}" th:value="${rol.id}"
 							th:text="${rol.rol}"></option>
 					</select>
@@ -40,8 +40,11 @@
 				</div>
 			</div>
 
+			<input th:if="${usuario.id != 0}" id="clave" name="clave" type="hidden" placeholder=""
+				class="form-control input-md" required="" th:field="*{clave}">
+				
 			<!-- Text input CLAVE-->
-			<div class="form-group">
+			<div th:if="${usuario.id == 0}" class="form-group">
 				<label class="col-md-4 control-label" for="clave">Clave</label>
 				<div class="col-md-4">
 					<input id="clave" th:field="*{clave}" name="clave" type="text"
@@ -80,7 +83,8 @@
 						required="">
 				</div>
 			</div>
-
+</div>
+<div class="datosSegundo">
 			<!-- Text input DIRECCION-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="direccion">DIRECCION</label>
@@ -183,9 +187,9 @@
 
 				</div>
 			</div>
-
+</div>
 			<!-- Button -->
-			<div class="form-group">
+			<div class="form-group" align="right">
 				<label class="col-md-4 control-label" for="singlebutton"></label>
 				<div class="col-md-4">
 					<button th:text="${usuario.id !=0} ? 'Guardar' : 'Crear'"
@@ -196,5 +200,6 @@
 
 		</fieldset>
 	</form>
+		<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

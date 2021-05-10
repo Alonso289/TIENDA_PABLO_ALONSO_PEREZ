@@ -53,24 +53,15 @@ public class UsuarioService {
 		return usuarioRepository.findByEmail(email);
 	}
 
-	public Usuario validarLogin(String email, String clave) {
+	public boolean validaLogin(String email, String clave) {
 
 		Usuario usuario = getUsuario(email);
+		boolean correcto = false;
 
-		if (usuario != null) {
-
-			if (compruebaCredenciales(usuario, clave)) {
-
-				return usuario;
-			}
-
-		} else {
-			System.out.print("El usuario no es correcto");
-		}
-
-		usuario = null;
-
-		return usuario;
+		if (usuario != null) 
+			correcto = compruebaCredenciales(usuario, clave);		
+			
+		return correcto;
 	}
 
 	// COMPRUEBA CREDENCIALES DE UN USUARIO

@@ -1,0 +1,20 @@
+.datosPrimero{
+	float: left;
+    width: 50%;
+    line-height: 25px;
+    margin: 20px;
+}
+
+.datosSegundo{
+	float: left;
+    width: 40%;
+    line-height: 25px;
+}
+
+legend{
+	margin: 20px;
+}
+
+.form-group{
+	margin: 20px;
+}

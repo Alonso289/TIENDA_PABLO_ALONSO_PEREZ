@@ -11,16 +11,11 @@
 		<h1>Usuarios</h1>
 	<table class="content-table table-striped">
 		<tr>
-			<th>Rol</th>
-			<th>Email</th>
 			<th>Nombre</th>
-			<th>Apellido 1</th>
-			<th>Apellido 2</th>
-			<th>Dirección</th>
-			<th>Provincia</th>
-			<th>Localidad</th>
-			<th>Teléfono</th>
-			<th>Dni</th>
+			<th>Categoria</th>
+			<th>Descripcion</th>
+			<th>Precio</th>
+
 		</tr>
 		<tr th:each="usuario : ${listaUsuarios}">
 			<div th:each="rol : ${listaRoles}">

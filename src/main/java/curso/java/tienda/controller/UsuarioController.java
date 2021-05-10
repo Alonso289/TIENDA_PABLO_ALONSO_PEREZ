@@ -36,35 +36,38 @@ public class UsuarioController {
 
 	@GetMapping("/usuario/new")
 	public String nuevo(Model model) {
+		
 		model.addAttribute("listaRoles", rs.getListaRoles());
-		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("usuario", new Usuario());		
 		return "/usuario/new";
 	}
 
 	@PostMapping("/usuario/new/submit")
 	public String nuevoSubmit(Model model, @ModelAttribute Usuario usuario) {
-		us.addUsuario(usuario);
+		
+		us.addUsuario(usuario);		
 		return "redirect:/usuario/list";
 	}
 
 	@GetMapping("/del/{nombre}")
-	public String eliminar(@PathVariable(value = "nombre") String nombre) {
-		// us.deleteById(id);
-		us.deleteByNombre(nombre);
+	public String delete(@PathVariable(value = "nombre") String nombre) {
+
+		us.deleteByNombre(nombre);		
 		return "redirect:/usuario/list";
 	}
 
 	@GetMapping("/usuario/edit/{nombre}")
-	public String editar(Model model, @PathVariable(value = "nombre") String nombre) {
+	public String edit(Model model, @PathVariable(value = "nombre") String nombre) {
 
 		model.addAttribute("listaRoles", rs.getListaRoles());
-		model.addAttribute("usuario", us.getByNombre(nombre));
+		model.addAttribute("usuario", us.getByNombre(nombre));		
 		return "/usuario/new";
 	}
 
 	@PostMapping("/usuario/edit/submit")
 	public String editSubmit(Model model, @ModelAttribute Usuario usuario) {
-		us.addUsuario(usuario);
+		
+		us.addUsuario(usuario);		
 		return "redirect:/usuario/list";
 	}
 }

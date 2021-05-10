@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="login-wrapper">
-		<form th:action="@{/login/acceso/validar}" method="post" class="form">
+		<form th:action="@{/login/acceso/valida}" method="post" class="form">
 			<img src="/img/avatar.png" alt="">
 			<h2>Inicio de Sesión</h2>
 			<div class="input-group">
@@ -20,7 +20,7 @@
 				<input type="clave" name="clave" id="clave" required> <label
 					for="clave">Contraseña</label>
 			</div>
-			<input type="submit" value="Login" class="submit-btn"> <a
+			<input type="submit" th:href="@{/usuario/new}" value="Login" class="submit-btn"> <a
 				class="registro">Registrarse</a>
 		</form>
 	</div>

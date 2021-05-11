@@ -49,10 +49,10 @@ public class UsuarioController {
 		return "redirect:/usuario/list";
 	}
 
-	@GetMapping("/del/{nombre}")
-	public String delete(@PathVariable(value = "nombre") String nombre) {
+	@GetMapping("/del/{id}")
+	public String delete(@PathVariable(value = "id") int id) {
 
-		us.deleteByNombre(nombre);		
+		us.deleteById(id);	
 		return "redirect:/usuario/list";
 	}
 

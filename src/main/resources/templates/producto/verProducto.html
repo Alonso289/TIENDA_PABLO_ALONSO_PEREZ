@@ -1,58 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tienda online</title>
-<th:block th:include="fragments/head.html"></th:block>
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-
-<style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <title>Producto card</title> 
+    <th:block th:include="fragments/head.html"></th:block>   
+    <link rel="stylesheet" href="/css/verProducto.css">
 </head>
 <body>
-	<nav th:replace="fragments/navigation.html :: navigation" />
-	<div class="album py-5 bg-light">
-		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-				<div class="col">
-					<div class="card shadow-sm">
-
-						<img th:src="@{/img/}+${producto.imagen}" />
-						<div class="card-body">
-							<p class="card-text" th:text="${producto.descripcion}">Descripción
-								del producto.</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
-								</div>
-								<small class="text-muted"
-									th:text="${producto.stock}+' productos disponibles'">0 productos disponibles</small>
-							</div>
+<nav th:replace="fragments/navigation.html :: navigation" />
+    <div class="container">
+        <div class="card">
+        <h1 class="big" th:text="${producto.Nombre}" >PRODUCTO CARD</h1>
+            <div class="productoBackground">                
+				<img th:src="@{/img/}+${producto.imagen}" alt="" class="producto show"/>
+            </div>
+            <div class="info">
+                <div class="productoName">
+                    <div>
+                        <h1 class="big" th:text="${producto.Nombre}">Nombre</h1>
+                        
+                    </div>
+                    	<div th:each="categoria : ${listaCategorias}">
+						<h3 class="small" th:if="${categoria.id == producto.id_categoria}" th:text="${categoria.nombre}">Categoria</h3>
 						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<footer th:replace="fragments/footer.html :: footer" />
+                </div>
+                <div class="description">
+                    <h3 class="title">Product Info</h3>
+                    <p class="text" th:text="${producto.descripcion}">Descripcion</p>
+                </div>
+                <div class="buy-price">
+                    <a th:href="@{/carrito/anadir/} + ${producto.id}"
+							th:text="'Añadir Al Carrito'" method="get" class="buy"><i class="fas fa-shopping-cart"></i>Añadir Al Carrito</a>                    
+                    <div class="price">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h1 th:text="${producto.precio}">Precio</h1>
+                                            <h1 >€</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    	<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>
->

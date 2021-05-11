@@ -1,44 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<title>ONLINE SHOP</title>
+<title>Listado Productos</title>
 <th:block th:include="fragments/head.html"></th:block>
-<link rel="stylesheet" href="/css/listProducto.css">
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"
-	rel="stylesheet">
+<link rel="stylesheet" href="/css/listUsuario.css">
 </head>
 <body>
 	<nav th:replace="fragments/navigation.html :: navigation" />
-	<div class="wrap">
-		<h1>Catálogo Productos</h1>
-		<div class="store-wrapper">
-			<div class="category_list" th:each="categoria : ${listaCategorias}">
-				<a type="button" class="category_item" th:text="${categoria.nombre}">Categoria</a>
-				<section class="products-list">
-					<div th:each="producto : ${listaProductos}" th:if="${categoria.id == producto.id_categoria}" class="product-item">
-						<img th:src="@{/img/}+${producto.imagen}" />
-						<p th:text="${producto.nombre}">Nombre</p>
-						<small class="text-muted" th:text="${producto.stock}+' productos disponibles'"></small> 
-						<a
-							th:href="@{/carrito/anadir/} + ${producto.id}"
-							th:text="'Añadir Al Carrito'" method="get"
-							class="btn btn-sm btn-outline-secondary">
-						</a>
-						 <a
-							th:href="@{/producto/verProducto/} + ${producto.nombre}"
-							th:text="'Ver Producto'" method="get"
-							class="btn btn-sm btn-outline-secondary">
-						</a>						
-					</div>
-				</section>
+		<h1>Productos</h1>
+	<table class="content-table table-striped">
+		<tr>
+			<th>Nombre</th>
+			<th>Categoria</th>
+			<th>Precio</th>
+			<th>Stock</th>
+			<th>Fecha Alta</th>
+			<th>Fecha Baja</th>
+			<th>Descripción</th>
+			<th>Imagen</th>
+		</tr>
+		<tr th:each="producto : ${listaProductos}">
+			<td th:text="${producto.nombre}">Nombre</td>
+			<div th:each="categoria : ${listaCategorias}">
+			<td th:if="${categoria.id == producto.id_categoria}" th:text="${categoria.nombre}">Categoria</td>
 			</div>
-			<br>
-		</div>
-	</div>
+			<td th:text="${producto.precio}">Precio</td>
+			<td th:text="${producto.stock}">Stock</td>
+			<td th:text="${producto.fechaAlta}">Fecha Alta</td>
+			<td th:text="${producto.fechaBaja}">Fecha Baja</td>
+			<td th:text="${producto.descripcion}">Descripción</td>
+			<td th:text="${producto.imagen}">Imagen</td>
+			<td><a th:href="@{/producto/edit/} + ${producto.nombre}"
+				th:text="'Editar'" method="get" class="btn btn-outline-primary"></a></td>
+			<td><a th:href="@{/del/} + ${producto.id}"
+				th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
+		</tr>
+	</table>
+	<div class="anadirUsuario">
+		<a th:href="@{/producto/new}" class="btn btn-outline-primary">Añadir Producto</a>
+	</div>	
 	<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

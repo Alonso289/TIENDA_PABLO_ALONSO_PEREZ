@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import curso.java.tienda.model.Producto;
+import curso.java.tienda.model.Usuario;
 import curso.java.tienda.repository.ProductoRepository;
 
 @Service
@@ -36,5 +37,9 @@ public class ProductoService {
 	public void addProducto(Producto producto) {
 		productoRepository.save(producto);
 		
+	}
+
+	public Producto getByNombre(String nombre) {
+		return productoRepository.findByNombre(nombre);
 	}
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
+<meta charset="UTF-8">
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" th:fragment="navigation">
@@ -19,16 +20,19 @@
 	        <li class="nav-item">
 	          <a class="nav-link" th:href="@{/login}">Login</a>
 	        </li>
-	        <!-- 
 	        <li class="nav-item">
-	          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+	          <a class="nav-link" th:href="@{/}">Inicio</a>
 	        </li>
-	        -->
+	        <li class="d-flex">
+	          <a class="nav-link" th:href="@{/usuario/list}">Usuarios</a>
+	        </li>
+	        <li class="d-flex">
+	          <a class="nav-link" th:href="@{/producto/list}">Productos</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" th:href="@{/carrito/list}">Carrito</a>
+	        </li>
 	      </ul>
-	      <form class="d-flex" th:action="@{/}" method="get">
-	        <input class="form-control me-2" type="search" placeholder="Buscar contacto" aria-label="Search" name="buscar">
-	        <button class="btn btn-outline-success" type="submit">Buscar</button>
-	      </form>
 	    </div>
 	  </div>
 	</nav>

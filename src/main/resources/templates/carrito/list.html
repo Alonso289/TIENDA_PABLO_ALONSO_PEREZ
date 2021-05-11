@@ -2,43 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Listado Usuarios</title>
+<title>Carrito</title>
 <th:block th:include="fragments/head.html"></th:block>
 <link rel="stylesheet" href="/css/listUsuario.css">
 </head>
 <body>
 	<nav th:replace="fragments/navigation.html :: navigation" />
-		<h1>Usuarios</h1>
+		<h1>Carrito</h1>
 	<table class="content-table table-striped">
 		<tr>
 			<th>Nombre</th>
 			<th>Categoria</th>
 			<th>Descripcion</th>
 			<th>Precio</th>
-
 		</tr>
-		<tr th:each="usuario : ${listaUsuarios}">
-			<div th:each="rol : ${listaRoles}">
-			<td th:if="${rol.id == usuario.id_rol}" th:text="${rol.rol}">Rol</td>
+		<tr th:each="producto : ${session.carrito}">
+			<td th:text="${producto.nombre}">Nombre</td>
+			<div th:each="categoria : ${listaCategorias}">
+			<td th:if="${categoria.id == producto.id_categoria}" th:text="${categoria.nombre}">Categoria</td>
 			</div>
-			<td th:text="${usuario.email}">Email</td>
-			<td th:text="${usuario.nombre}">Nombre</td>
-			<td th:text="${usuario.apellido1}">Primer Apellido</td>
-			<td th:text="${usuario.apellido2}">Segundo Apellido</td>
-			<td th:text="${usuario.direccion}">Dirección</td>
-			<td th:text="${usuario.provincia}">Provincia</td>
-			<td th:text="${usuario.localidad}">Localidad</td>
-			<td th:text="${usuario.telefono}">Telefono</td>
-			<td th:text="${usuario.dni}">DNI</td>
-			<td><a th:href="@{/usuario/edit/} + ${usuario.nombre}"
-				th:text="'Editar'" method="get" class="btn btn-outline-primary"></a></td>
-			<td><a th:href="@{/del/} + ${usuario.nombre}"
+			<td th:text="${producto.descripcion}">Descripcion</td>
+			<td th:text="${producto.precio}">Precio</td>
+			<td><a th:href="@{/carrito/eliminar/} + ${producto.id}"
 				th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
 		</tr>
 	</table>
-	<div class="anadirUsuario">
-		<a th:href="@{/usuario/new}" class="btn btn-outline-primary">Añadir Usuario</a>
-	</div>	
+
 	<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

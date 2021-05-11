@@ -37,7 +37,7 @@
 			<td th:text="${usuario.dni}">DNI</td>
 			<td><a th:href="@{/usuario/edit/} + ${usuario.nombre}"
 				th:text="'Editar'" method="get" class="btn btn-outline-primary"></a></td>
-			<td><a th:href="@{/del/} + ${usuario.nombre}"
+			<td><a th:href="@{/del/} + ${usuario.id}"
 				th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
 		</tr>
 	</table>

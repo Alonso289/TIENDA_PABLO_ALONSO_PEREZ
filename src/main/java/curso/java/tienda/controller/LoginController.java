@@ -29,7 +29,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/login/acceso/valida")
-	public String validaAcceso(HttpSession sesion, Model model, @RequestParam(required = true) String email,
+	public String validaAcceso(HttpSession session, Model model, @RequestParam(required = true) String email,
 			@RequestParam(required = true) String clave) {
 
 		boolean correcto = us.validaLogin(email, clave);
@@ -37,7 +37,7 @@ public class LoginController {
 		if(correcto){
 			
 			Usuario usuario = us.getUsuario(email);			
-			sesion.setAttribute("usuario", usuario);
+			session.setAttribute("usuario", usuario);
 						
 			return "redirect:/";
 		}

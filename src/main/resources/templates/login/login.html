@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<th:block th:include="fragments/head.html"></th:block>
 <link rel="stylesheet" href="/css/loginStyle.css">
 <title>Inicio de Sesión</title>
 </head>
 <body>
+	<nav th:replace="fragments/navigation.html :: navigation" />
 	<div class="login-wrapper">
 		<form th:action="@{/login/acceso/valida}" method="post" class="form">
 			<img src="/img/avatar.png" alt="">
@@ -20,9 +22,10 @@
 				<input type="clave" name="clave" id="clave" required> <label
 					for="clave">Contraseña</label>
 			</div>
-			<input type="submit" th:href="@{/usuario/new}" value="Login" class="submit-btn"> <a
-				class="registro">Registrarse</a>
+			<input type="submit" th:href="@{/usuario/new}" value="Login" class="submit-btn"> 
+			<a class="registro">Registrarse</a>
 		</form>
 	</div>
+		<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

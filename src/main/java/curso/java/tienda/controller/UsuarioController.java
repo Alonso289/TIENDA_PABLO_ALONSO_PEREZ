@@ -2,6 +2,8 @@ package curso.java.tienda.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +29,13 @@ public class UsuarioController {
 	private RolService rs;
 
 	@GetMapping("/usuario/list")
-	public String listaUsuario(Model model) {
-
-		model.addAttribute("listaUsuarios", us.getListaUsuarios());
+	public String listaUsuario(HttpSession session, Model model) {
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		if(usuario.getRol() == 2)
+			model.addAttribute("listaUsuarios", us.getListaByRol(3));
+		else
+			model.addAttribute("listaUsuarios", us.getListaUsuarios());
+		
 		model.addAttribute("listaRoles", rs.getListaRoles());
 		return "/usuario/list";
 	}
@@ -44,7 +50,7 @@ public class UsuarioController {
 
 	@PostMapping("/usuario/new/submit")
 	public String nuevoSubmit(Model model, @ModelAttribute Usuario usuario) {
-		
+	
 		us.addUsuario(usuario);		
 		return "redirect:/usuario/list";
 	}
@@ -56,11 +62,11 @@ public class UsuarioController {
 		return "redirect:/usuario/list";
 	}
 
-	@GetMapping("/usuario/edit/{nombre}")
-	public String edit(Model model, @PathVariable(value = "nombre") String nombre) {
+	@GetMapping("/usuario/edit/{id}")
+	public String edit(Model model, @PathVariable(value = "id") int id) {
 
 		model.addAttribute("listaRoles", rs.getListaRoles());
-		model.addAttribute("usuario", us.getByNombre(nombre));		
+		model.addAttribute("usuario", us.getUsuario(id));		
 		return "/usuario/new";
 	}
 

@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <title>Listado Usuarios</title>
 <th:block th:include="fragments/head.html"></th:block>
-<link rel="stylesheet" href="/css/listUsuario.css">
+<link rel="stylesheet" href="/css/lists.css">
 </head>
 <body>
 	<nav th:replace="fragments/navigation.html :: navigation" />
-		<h1>Usuarios</h1>
+	<h1>Usuarios</h1>
 	<table class="content-table table-striped">
 		<tr>
 			<th>Rol</th>
@@ -24,7 +24,7 @@
 		</tr>
 		<tr th:each="usuario : ${listaUsuarios}">
 			<div th:each="rol : ${listaRoles}">
-			<td th:if="${rol.id == usuario.id_rol}" th:text="${rol.rol}">Rol</td>
+				<td th:if="${rol.id == usuario.rol}" th:text="${rol.rol}">Rol</td>
 			</div>
 			<td th:text="${usuario.email}">Email</td>
 			<td th:text="${usuario.nombre}">Nombre</td>
@@ -35,15 +35,17 @@
 			<td th:text="${usuario.localidad}">Localidad</td>
 			<td th:text="${usuario.telefono}">Telefono</td>
 			<td th:text="${usuario.dni}">DNI</td>
-			<td><a th:href="@{/usuario/edit/} + ${usuario.nombre}"
+			<td><a th:href="@{/usuario/edit/} + ${usuario.id}"
 				th:text="'Editar'" method="get" class="btn btn-outline-primary"></a></td>
-			<td><a th:href="@{/del/} + ${usuario.id}"
-				th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
+			<td th:if="${session.usuario.rol == 1}"><a
+				th:href="@{/del/} + ${usuario.id}" th:text="'Eliminar'" method="get"
+				class="btn btn-outline-danger"></a></td>
 		</tr>
 	</table>
 	<div class="anadirUsuario">
-		<a th:href="@{/usuario/new}" class="btn btn-outline-primary">Añadir Usuario</a>
-	</div>	
+		<a th:href="@{/usuario/new}" class="btn btn-outline-primary">Añadir
+			Usuario</a>
+	</div>
 	<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

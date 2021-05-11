@@ -80,11 +80,11 @@ public class ProductoController {
 		return "redirect:/producto/list";
 	}
 	
-	@GetMapping("/producto/edit/{nombre}")
-	public String edit(Model model, @PathVariable(value = "nombre") String nombre) {
+	@GetMapping("/producto/edit/{id}")
+	public String edit(Model model, @PathVariable(value = "id") int id) {
 
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
-		model.addAttribute("producto", ps.getByNombre(nombre));		
+		model.addAttribute("producto", ps.getProducto(id));		
 		return "/producto/new";
 	}
 

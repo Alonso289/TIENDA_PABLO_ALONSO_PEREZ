@@ -8,6 +8,7 @@ import curso.java.tienda.model.Usuario;
 import curso.java.tienda.repository.UsuarioRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -42,7 +43,7 @@ public class UsuarioService {
 		usuarioRepository.delete(usuario);
 	}
 
-	public void deleteById(long id) {
+	public void deleteById(int id) {
 		usuarioRepository.deleteById(id);
 	}
 
@@ -54,14 +55,19 @@ public class UsuarioService {
 		return usuarioRepository.findByEmail(email);
 	}
 
+	public List<Usuario> getListaByRol(int rol) {
+		return usuarioRepository.findByRol(rol);
+
+	}
+
 	public boolean validaLogin(String email, String clave) {
 
 		Usuario usuario = getUsuario(email);
 		boolean correcto = false;
 
-		if (usuario != null) 
-			correcto = compruebaCredenciales(usuario, clave);		
-			
+		if (usuario != null)
+			correcto = compruebaCredenciales(usuario, clave);
+
 		return correcto;
 	}
 

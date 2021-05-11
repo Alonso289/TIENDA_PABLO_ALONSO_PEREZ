@@ -1,5 +1,6 @@
 package curso.java.tienda.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +16,8 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private int id_rol;
+	@Column(name="id_rol")
+	private int rol;
 	private String email;
 	private String clave;
 	private String nombre;
@@ -29,25 +31,10 @@ public class Usuario {
 
 	public Usuario() {
 	}
-	public Usuario( String apellido1, String apellido2, String clave, String direccion, String dni, 
-			String email, int id_rol, String localidad, String nombre, String provincia, String telefono) {
-		this.id_rol = id_rol;
-		this.email = email;
-		this.clave = clave;
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.direccion = direccion;
-		this.localidad = localidad;
-		this.provincia = provincia;
-		this.telefono = telefono;
-		this.dni = dni;
-	}
-	
-	public Usuario(int id, int id_rol, String email, String clave, String nombre, String apellido1, String apellido2,
-			String direccion, String localidad, String provincia, String telefono, String dni) {
-		this.id = id;
-		this.id_rol = id_rol;
+
+	public Usuario(String apellido1, String apellido2, String clave, String direccion, String dni, String email,
+			int rol, String localidad, String nombre, String provincia, String telefono) {
+		this.rol = rol;
 		this.email = email;
 		this.clave = clave;
 		this.nombre = nombre;
@@ -60,10 +47,26 @@ public class Usuario {
 		this.dni = dni;
 	}
 
-	public Usuario(String email, String clave, int id_rol) {
+	public Usuario(int id, int rol, String email, String clave, String nombre, String apellido1, String apellido2,
+			String direccion, String localidad, String provincia, String telefono, String dni) {
+		this.id = id;
+		this.rol = rol;
 		this.email = email;
 		this.clave = clave;
-		this.id_rol = id_rol;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.direccion = direccion;
+		this.localidad = localidad;
+		this.provincia = provincia;
+		this.telefono = telefono;
+		this.dni = dni;
+	}
+
+	public Usuario(String email, String clave, int rol) {
+		this.email = email;
+		this.clave = clave;
+		this.rol = rol;
 	}
 
 	public long getId() {
@@ -72,6 +75,14 @@ public class Usuario {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
 	}
 
 	public String getEmail() {
@@ -150,16 +161,6 @@ public class Usuario {
 		return dni;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
 
-	public int getId_rol() {
-		return id_rol;
-	}
-
-	public void setId_rol(int id_rol) {
-		this.id_rol = id_rol;
-	}
 
 }

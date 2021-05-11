@@ -19,13 +19,12 @@
 					for="email">Email</label>
 			</div>
 			<div class="input-group">
-				<input type="clave" name="clave" id="clave" required> <label
+				<input type="password" name="clave" id="clave" required> <label
 					for="clave">Contraseña</label>
 			</div>
-			<input type="submit" th:href="@{/usuario/new}" value="Login" class="submit-btn"> 
-			<a class="registro">Registrarse</a>
+			<input type="submit" value="Login" class="submit-btn"> 
 		</form>
-	</div>
+	</div >
 		<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

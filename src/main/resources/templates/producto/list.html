@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Listado Productos</title>
 <th:block th:include="fragments/head.html"></th:block>
-<link rel="stylesheet" href="/css/listUsuario.css">
+<link rel="stylesheet" href="/css/lists.css">
 </head>
 <body>
 	<nav th:replace="fragments/navigation.html :: navigation" />
@@ -31,9 +31,9 @@
 			<td th:text="${producto.fechaBaja}">Fecha Baja</td>
 			<td th:text="${producto.descripcion}">Descripción</td>
 			<td th:text="${producto.imagen}">Imagen</td>
-			<td><a th:href="@{/producto/edit/} + ${producto.nombre}"
+			<td><a th:href="@{/producto/edit/} + ${producto.id}"
 				th:text="'Editar'" method="get" class="btn btn-outline-primary"></a></td>
-			<td><a th:href="@{/del/} + ${producto.id}"
+			<td th:if="${session.usuario.rol == 1}" ><a th:href="@{/del/} + ${producto.id}"
 				th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
 		</tr>
 	</table>

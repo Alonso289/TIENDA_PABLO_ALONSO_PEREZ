@@ -8,31 +8,23 @@
 </head>
 <body>
 	<nav th:replace="fragments/navigation.html :: navigation" />
-	
 	<form class="form-horizontal"
-		th:action="${usuario.id !=0} ? @{/usuario/edit/submit} : @{/usuario/new/submit}"
+		th:action="@{/login/registro}"
 		th:object="${usuario}" method="post">
 		<fieldset>
 
 			<!-- Form Name -->
-			<legend
-				th:text="${usuario.id !=0} ? 'Editar usuario' : 'Nuevo usuario'">Nuevo
-				usuario / Editar usuario</legend>
+			<legend>Registro Usuario</legend>
 
+			<!-- ID HIDDEN-->
 			<input id="id" name="id" type="hidden" placeholder=""
 				class="form-control input-md" required="" th:field="*{id}">
+			<!-- ROL HIDDEN-->
+			<input id="rol" name="rol" type="hidden" placeholder=""
+				class="form-control input-md" required="" th:field="*{rol}">
+
 			<div class="datosPrimero">
-				<!-- Text input ROL-->
-				<div class="form-group">
-					<label class="col-md-4 control-label" for="id_rol">Rol</label>
-					<div class="col-md-4">
-						<select id="rol" th:field="*{rol}" required="" name="rol"
-							type="text" class="form-control">
-							<option th:each="rol : ${listaRoles}" th:value="${rol.id}"
-								th:text="${rol.rol}"></option>
-						</select>
-					</div>
-				</div>
+
 				<!-- Text input EMAIL-->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="email">Email</label>
@@ -41,10 +33,6 @@
 							placeholder="" class="form-control input-md" required="">
 					</div>
 				</div>
-
-				<input th:if="${usuario.id != 0}" id="clave" name="clave"
-					type="hidden" placeholder="" class="form-control input-md"
-					required="" th:field="*{clave}">
 
 				<!-- Text input CLAVE-->
 				<div th:if="${usuario.id == 0}" class="form-group">
@@ -195,9 +183,8 @@
 			<div class="form-group" align="right">
 				<label class="col-md-4 control-label" for="singlebutton"></label>
 				<div class="col-md-4">
-					<button th:text="${usuario.id !=0} ? 'Guardar' : 'Crear'"
-						id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar
-						/ Crear</button>
+					<button id="singlebutton" name="singlebutton"
+						class="btn btn-primary">Registrarse</button>
 				</div>
 			</div>
 

@@ -3,6 +3,7 @@ package curso.java.tienda.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ import curso.java.tienda.model.OpcionesMenu;
 import curso.java.tienda.service.OpcionesMenuService;
 import curso.java.tienda.service.UsuarioService;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 @Controller
 @RequestMapping("")
 public class LoginController {
@@ -27,20 +31,28 @@ public class LoginController {
 
 	@Autowired
 	private OpcionesMenuService oms;
+	
+	private static Logger logger = LogManager.getLogger(CarritoController.class);
 
 	@GetMapping("/login")
 	public String login(Model model) {
+		
+		logger.info("MOSTRANDO VISTA DEL LOGIN");
 		return "/login/login";
 	}
 
 	@PostMapping("/login/acceso/valida")
-	public String validaAcceso(HttpSession session, Model model, @RequestParam(required = true) String email,
+	public String validaAcceso(HttpSession session, Model model, @Valid @RequestParam(required = true) String email,
 			@RequestParam(required = true) String clave) {
-
+		
+		logger.info("VALIDANDO LOGIN");
+		
 		boolean correcto = us.validaLogin(email, clave);
 
 		if (correcto) {
-
+			
+			logger.info("LOGIN VALIDADO");
+			
 			Usuario usuario = us.getUsuario(email);
 			session.setAttribute("usuario", usuario);
 			
@@ -56,27 +68,35 @@ public class LoginController {
 			
 			session.setAttribute("opcionesMenu", opcionesMenu);
 
+			logger.info("REDIRECCIONANDO AL INICIO");
 			return "redirect:/";
-		} else
+		} else {
+			logger.info("LOGIN NO VALIDO");
 			return "redirect:/login";
-
+		}
 	}
 
 	@GetMapping("/login/registrar")
 	public String loginRegistrar(Model model) {
 
 		Usuario usuario = new Usuario();
-		model.addAttribute("usuario", usuario);
-
+		model.addAttribute("usuario", usuario);		
+		
+		logger.info("MOSTRANDO VISTA REGISTRO");
+		
 		return "/usuario/registro";
 
 	}
 
 	@PostMapping("/login/registro")
-	public String loginRegistro(Model model, @ModelAttribute Usuario usuario) {
-
+	public String loginRegistro(Model model, @Valid @ModelAttribute Usuario usuario) {
+		
+		logger.info("REGISTRANDO USUARIO");
+		
 		usuario.setRol(3);
 		us.addUsuario(usuario);
+		
+		logger.info("USUARIO REGISTRADO");
 
 		return "redirect:/login";
 
@@ -85,7 +105,9 @@ public class LoginController {
 	@GetMapping("/close")
 	public String cerrarSesion(HttpSession session, Model model) {
 
+		logger.info("CERRANDO SESSION");
 		session.invalidate();
+		logger.info("SESSION CERRADA");
 		return "redirect:/";
 
 	}

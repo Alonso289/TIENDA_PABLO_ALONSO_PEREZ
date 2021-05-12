@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "productos")
@@ -15,11 +16,21 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@NotBlank(message="El id_categoria es obligatorio")
 	private Integer id_categoria;
+	
+	@NotBlank(message="El nombre es obligatorio")
 	private String nombre;
+	
+	@NotBlank(message="El descripcion es obligatorio")
 	private String descripcion;
+	
+	@NotBlank(message="El precio es obligatorio")
 	private Double precio;
+	
+	@NotBlank(message="El stock es obligatorio")
 	private Integer stock;
+	
 	private Date fechaAlta;
 	private Date fechaBaja;
 	private Float impuesto;

@@ -33,7 +33,7 @@
 			<td th:text="${producto.imagen}">Imagen</td>
 			<td><a th:href="@{/producto/edit/} + ${producto.id}"
 				th:text="'Editar'" method="get" class="btn btn-outline-primary"></a></td>
-			<td th:if="${session.usuario.rol == 1}" ><a th:href="@{/del/} + ${producto.id}"
+			<td th:if="${session.usuario.rol == 1}" ><a th:href="@{/producto/del/} + ${producto.id}"
 				th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
 		</tr>
 	</table>

@@ -43,9 +43,9 @@ public class UsuarioService {
 		usuarioRepository.delete(usuario);
 	}
 
-	public void deleteById(int id) {
-		usuarioRepository.deleteById(id);
-	}
+    public void deleteById(long id) {
+    	usuarioRepository.deleteById(id);
+    }
 
 	public void deleteByNombre(String nombre) {
 		usuarioRepository.delete(usuarioRepository.findByNombre(nombre));

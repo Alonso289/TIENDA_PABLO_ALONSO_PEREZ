@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import curso.java.tienda.model.Producto;
-import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ProductoService;
-import curso.java.tienda.service.RolService;
 import curso.java.tienda.service.UsuarioService;
 import curso.java.tienda.util.Data;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 @Controller
 @RequestMapping("")
@@ -32,6 +34,8 @@ public class ProductoController {
 	private ProductoService ps;
 	@Autowired
 	private UsuarioService us;
+	
+	private static Logger logger = LogManager.getLogger(ProductoController.class);
 
 	@GetMapping("")
 	public String index(HttpSession session, Model model) {
@@ -46,52 +50,81 @@ public class ProductoController {
 		model.addAttribute("listaProductos", ps.getListaProductos());
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
 		
-		return "/producto/index";
+		logger.info("ACCEDIENDO A LA PAGINA DE INICIO");
+		return "index";
 	}
 
 	@GetMapping("/producto/list")
 	public String listaProducto(Model model) {
 
+		logger.info("OBTENIENDO LA LISTA DE PRODUCTOS");
+		
 		model.addAttribute("listaProductos", ps.getListaProductos());
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
+		
+		logger.info("MOSTRANDO LA LISTA DE PRODUCTOS");
 		return "/producto/list";
 	}
 	
 	@GetMapping("/producto/verProducto/{id}")
-	public String verProducto(Model model, @PathVariable(value = "id") int id) {
+	public String verProducto(Model model, @Valid @PathVariable(value = "id") int id) {
 
+		logger.info("OBTENIENDO PRODUCTO");
+		
 		model.addAttribute("producto", ps.getProducto(id));
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
+		
+		logger.info("MOSTRANDO VISTA DEL PRODUCTO");
 		return "/producto/verProducto";
 	}
 	
 	@GetMapping("/producto/new")
 	public String nuevo(Model model) {
 		
+		
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
-		model.addAttribute("producto", new Producto());		
+		model.addAttribute("producto", new Producto());	
+		
+		logger.info("MOSTRANDO VISTA DE NUEVO PRODUCTO");
 		return "/producto/new";
 	}
 
 	@PostMapping("/producto/new/submit")
-	public String nuevoSubmit(Model model, @ModelAttribute Producto producto) {
+	public String nuevoSubmit(Model model, @Valid @ModelAttribute Producto producto) {
+		
+		logger.info("ANADIENDO NUEVO PRODUCTO");
 		
 		ps.addProducto(producto);		
+		
+		logger.info("PRODUCTO ANADIDO");
 		return "redirect:/producto/list";
 	}
 	
 	@GetMapping("/producto/edit/{id}")
-	public String edit(Model model, @PathVariable(value = "id") int id) {
-
+	public String edit(Model model, @Valid @PathVariable(value = "id") int id) {
+		
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
-		model.addAttribute("producto", ps.getProducto(id));		
+		model.addAttribute("producto", ps.getProducto(id));	
+		
+		logger.info("MOSTRANDO VISTA DE EDICION PRODUCTO");
 		return "/producto/new";
 	}
 
 	@PostMapping("/producto/edit/submit")
-	public String editSubmit(Model model, @ModelAttribute Producto producto) {
+	public String editSubmit(Model model, @Valid @ModelAttribute Producto producto) {
+		
+		logger.info("GUARDANDO EDICION DE PRODUCTO");
 		
 		ps.addProducto(producto);		
+		
+		logger.info("PRODUCTO GUARDADO");
+		return "redirect:/producto/list";
+	}
+	
+	@GetMapping("producto/del/{id}")
+	public String eliminarUsuario(@PathVariable("id") int id, Model model) {
+		
+		ps.deleteById(id);
 		return "redirect:/producto/list";
 	}
 	

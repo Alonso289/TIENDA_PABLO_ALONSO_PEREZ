@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 //import javax.persistence.Column;
 
@@ -16,17 +17,39 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	@Column(name="id_rol")
+	@NotBlank(message="El rol es obligatorio")
 	private int rol;
+	
+	@NotBlank(message="El email es obligatorio")
 	private String email;
+	
+	@NotBlank(message="El clave es obligatorio")
 	private String clave;
+	
+	@NotBlank(message="El nombre es obligatorio")
 	private String nombre;
+	
+	@NotBlank(message="El apellido1 es obligatorio")
 	private String apellido1;
+	
+	@NotBlank(message="El apellido2 es obligatorio")
 	private String apellido2;
+	
+	@NotBlank(message="El direccion es obligatorio")
 	private String direccion;
+	
+	@NotBlank(message="El provincia es obligatorio")
 	private String provincia;
+	
+	@NotBlank(message="El nombre es obligatorio")
 	private String localidad;
+	
+	@NotBlank(message="El telefono es obligatorio")
 	private String telefono;
+	
+	@NotBlank(message="El dni es obligatorio")
 	private String dni;
 
 	public Usuario() {

@@ -42,4 +42,8 @@ public class ProductoService {
 	public Producto getByNombre(String nombre) {
 		return productoRepository.findByNombre(nombre);
 	}
+	
+    public void deleteById(int id) {
+    	productoRepository.deleteById(id);
+    }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Perfil</title>
+<th:block th:include="fragments/head.html"></th:block>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/perfil.css">
+</head>
+<body>
+	<nav th:replace="fragments/navigation.html :: navigation" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Perfil</title>
+<th:block th:include="fragments/head.html"></th:block>
+<link rel="stylesheet" href="/css/lists.css">
+</head>
+<body>
+	<nav th:replace="fragments/navigation.html :: navigation" />
+<div class="card">
+  <img src="/img/avatar.png" style="width:100%">
+  <br>
+  <h1 th:text="'Nombre: ' + ${session.usuario.nombre}">Nombre: </h1>
+  <p class="title" th:text="'Primer Apellido: ' + ${session.usuario.apellido1}">Primer Apellido:</p>
+  <p class="title" th:text="'Segundo Apellido: ' + ${session.usuario.apellido2}">Segundo Apellido:</p>
+  <p class="title" th:text="'Email: ' + ${session.usuario.email}">Email:</p>
+  <p class="title" th:text="'Direccion: ' + ${session.usuario.direccion}">Direccion:</p>
+  <p class="title" th:text="'Localidad: ' + ${session.usuario.localidad}">Localidad:</p>
+  <p class="title" th:text="'Provincia: ' + ${session.usuario.provincia}">Provincia:</p>
+  <p class="title" th:text="'Telefono: ' + ${session.usuario.telefono}">Telefono:</p>
+  <p class="title" th:text="'DNI: ' + ${session.usuario.dni}">DNI:</p>
+  <a th:href="@{/}"><button>Inicio</button></a>
+</div>
+	<footer th:replace="fragments/footer.html :: footer" />
+</body>
+</html>

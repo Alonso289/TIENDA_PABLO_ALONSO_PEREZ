@@ -76,4 +76,10 @@ public class UsuarioController {
 		us.addUsuario(usuario);		
 		return "redirect:/usuario/list";
 	}
+	
+	@GetMapping("/usuario/perfil")
+	public String perfil(Model model) {
+	
+		return "/usuario/perfil";
+	}
 }

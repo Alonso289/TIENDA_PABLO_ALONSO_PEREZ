@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import curso.java.tienda.model.Categoria;
-import curso.java.tienda.model.Producto;
 import curso.java.tienda.repository.CategoriaRepository;
 
 @Service
@@ -20,7 +19,7 @@ public class CategoriaService {
 		return categoriaRepository.findAll();
 
 	}
-	
+
 	public void saveListaCategorias(ArrayList<Categoria> lista) {
 		categoriaRepository.saveAll(lista);
 	}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Productos Pedido</title>
+<th:block th:include="fragments/head.html"></th:block>
+<link rel="stylesheet" href="/css/lists.css">
+</head>
+<body>
+	<nav th:replace="fragments/navigation.html :: navigation" />
+	<h1>Productos Pedido</h1>
+	<table class="content-table table-striped">
+		<tr>
+			<th>Producto</th>
+			<th>Precio</th>
+			<th>Unidades</th>
+			<th>Impuesto</th>
+			<th>Total</th>
+		</tr>
+		<tr th:each="detalle : ${listaDetalles}">
+			<div th:each="producto : ${listaProductos}">
+				<td th:if="${detalle.idProducto == producto.id}" th:text="${producto.nombre}">Nombre Producto</td>
+			</div>
+			<td th:text="${detalle.precioUnidad}">Precio Unidad</td>
+			<td th:text="${detalle.unidades}">Unidades</td>
+			<td th:text="${detalle.impuesto}">Impuesto</td>
+			<td th:text="${detalle.Total} + ' €'">Total</td>
+		</tr>
+		
+		
+	</table>
+
+	<footer th:replace="fragments/footer.html :: footer" />
+</body>
+</html>

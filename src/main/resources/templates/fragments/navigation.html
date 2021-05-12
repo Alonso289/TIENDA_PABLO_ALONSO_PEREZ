@@ -32,12 +32,15 @@
 
 					<li class="nav-item"><a class="nav-link"
 						th:href="@{/carrito/list}">Carrito</a></li>
+						
+					<li th:if="${session.usuario != null}" class="nav-item"><a class="nav-link"
+						th:href="@{/pedido/list}">Pedidos</a></li>
 
 					<li th:if="${session.usuario == null}" class="nav-item"><a
 						class="nav-link" th:href="@{/login/registrar}">Registrarse</a></li>
 
 					<li th:if="${session.usuario != null}" class="nav-item"><a
-						class="nav-link" th:href="@{/close}">Cerrar Sesion</a></li>
+						class="nav-link" th:href="@{/close}">Cerrar Sesión</a></li>
 
 				</ul>
 			</div>

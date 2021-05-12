@@ -15,16 +15,16 @@ public class RolService {
 	private RolRepository rolRepository;
 
 	public Iterable<Rol> getListaRoles() {
-		
+
 		return rolRepository.findAll();
 	}
-	
+
 	public void saveListaRoles(ArrayList<Rol> lista) {
 		rolRepository.saveAll(lista);
 	}
 
 	public void addRol(Rol rol) {
 		rolRepository.save(rol);
-		
+
 	}
 }

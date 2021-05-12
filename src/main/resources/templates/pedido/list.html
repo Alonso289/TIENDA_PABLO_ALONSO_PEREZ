@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Listado Usuarios</title>
+<th:block th:include="fragments/head.html"></th:block>
+<link rel="stylesheet" href="/css/lists.css">
+</head>
+<body>
+	<nav th:replace="fragments/navigation.html :: navigation" />
+	<h1>Pedidos</h1>
+	<table class="content-table table-striped">
+		<tr th:if="${session.usuario.rol != 3}">
+			<th>Id</th>
+			<th>Usuario</th>
+			<th>Fecha Compra</th>
+			<th>Metodo de Pago</th>
+			<th>Estado</th>
+			<th>Numero Factura</th>
+			<th>Total</th>
+		</tr>
+		
+		<!-- LISTA EMPLEADO -->
+		<tr th:if="${session.usuario.rol != 3}"  th:each="pedido : ${listaPedidos}">
+			<td th:text="${pedido.id}">Id</td>
+			<div th:each="usuario : ${listaUsuarios}">
+				<td th:if="${usuario.id == pedido.idUsuario}" th:text="${usuario.email}">Email</td>
+			</div>
+			<td th:text="${pedido.fecha}">Fecha</td>
+			<td th:text="${pedido.metodoPago}">Metodo Pago</td>
+			<td>
+				<a th:if="${pedido.estado == 'Enviado'}"  th:text="${pedido.estado}">Estado</a>
+		        <a th:if="${pedido.estado == 'Pendiente'}" th:text="${pedido.estado}">Estado</a>
+		        <a th:if="${pedido.estado == 'Cancelado'}"  th:text="${pedido.estado}">Estado</a>
+		        <a th:if="${pedido.estado == 'Pendiente Cancelar'}" th:text="${pedido.estado}">Estado</a>
+		    </td>
+			<td th:text="${pedido.numFactura}">Numero Factura</td>
+			<td th:text="${pedido.total} + ' €'">Total Pedido</td>
+			<td><a class="btn btn-outline-primary" th:href="@{/pedido/listDetalle/} + ${pedido.id}" th:text="'Ver Detalle'" method="get"></a></td>
+			<td th:if="${pedido.estado != 'Enviado'}">
+				<a th:href="@{/pedido/enviar/} + ${pedido.id}" th:text="'Enviar'" method="get"></a>	
+			</td>
+			<td th:if="${ session.usuario.rol == 1 && pedido.estado != 'Cancelado'}">
+				<a th:href="@{/pedido/cancelar/} + ${pedido.id}" th:text="'Cancelar'" method="get"></a>	
+			</td>	
+		</tr>
+		<tr th:if="${session.usuario.rol == 3}">
+			<th>Fecha Compra</th>
+			<th>Metodo de Pago</th>
+			<th>Estado</th>
+			<th>Numero Factura</th>
+			<th>Total</th>
+		</tr>
+		<!-- LISTA CLIENTE -->
+		<tr  th:if="${session.usuario.rol == 3}" th:each="pedido : ${listaPedidos}">
+			<div th:if="${pedido.idUsuario == session.usuario.id}">				
+				<td th:text="${pedido.fecha}">Fecha</td>
+				<td th:text="${pedido.metodoPago}">Metodo Pago</td>
+				<td>
+					<a th:if="${pedido.estado == 'Enviado'}"  th:text="${pedido.estado}">Estado</a>
+			        <a th:if="${pedido.estado == 'Pendiente'}" th:text="${pedido.estado}">Estado</a>
+			        <a th:if="${pedido.estado == 'Cancelado'}"  th:text="${pedido.estado}">Estado</a>
+			        <a th:if="${pedido.estado == 'Pendiente Cancelar'}" th:text="${pedido.estado}">Estado</a>
+			    </td>
+				<td th:text="${pedido.numFactura}">Numero Factura</td>
+				<td th:text="${pedido.total} + ' €'">Total Pedido</td>
+				<td><a class="btn btn-outline-primary" th:href="@{/pedido/listDetalle/} + ${pedido.id}" th:text="'Ver Detalle'" method="get"></a></td>
+				<td th:if="${pedido.estado != 'Pendiente Cancelar'}">
+				<a th:href="@{/pedido/cancelar/} + ${pedido.id}" th:text="'Cancelar'" method="get"></a>	
+				</td>	
+			</div>
+		</tr>
+		
+		
+	</table>
+	<footer th:replace="fragments/footer.html :: footer" />
+</body>
+</html>

@@ -17,9 +17,7 @@ public class OpcionesMenuService {
 	public Iterable<OpcionesMenu> getListaOpciones() {
 
 		return (ArrayList<OpcionesMenu>) opcionesMenuRepository.findAll();
-		
 
-		
 	}
 
 }

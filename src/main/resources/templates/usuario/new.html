@@ -96,12 +96,12 @@
 			<div class="datosSegundo">
 				<!-- Text input DIRECCION-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="direccion">DIRECCION</label>
+					<label class="col-md-4 control-label" for="direccion">Dirección</label>
 					<div class="col-md-4">
 						<input id="direccion" th:field="*{direccion}" name="direccion"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
-							<p th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Direccion tiene errores</p>
+							<p th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Dirección tiene errores</p>
 					</div>
 				</div>
 
@@ -181,7 +181,7 @@
 
 				<!-- Text input TELEFONO-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="telefono">Telefono</label>
+					<label class="col-md-4 control-label" for="telefono">Teléfono</label>
 					<div class="col-md-4">
 						<input id="telefono" th:field="*{telefono}" name="telefono"
 							type="text" placeholder="" class="form-control input-md"

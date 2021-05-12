@@ -13,7 +13,7 @@
 		<tr>
 			<th>Nombre</th>
 			<th>Categoria</th>
-			<th>Descripcion</th>
+			<th>Descripción</th>
 			<th>Precio</th>
 		</tr>
 		<tr th:each="producto : ${session.carrito}">
@@ -27,10 +27,29 @@
 				th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
 		</tr>
 	</table>
+	<form th:if= "${session.usuario == null || session.usuario.rol == 3}" th:action="@{/carrito/buy}" method="get">
+		<table class="content-table table-striped">
+		<tr>
+			<th>Método Pago</th>
+			<th>Precio</th>
+		</tr>
+		<tr>
+			<td>
+			<div class="form-group">
+				<div class="col-md-5">
+	                <select class="form-control" name="metodoPago">
+	                	<option th:each="metodo : ${metodoPago}" th:value="${metodo.metodoPago}" th:text="${metodo.metodoPago}">Metodo Pago</option>
+	                </select>
+				</div>
+			</div>
+			</td>
+			<td><a th:text="${total}"></a></td>
+		</tr>
+	</table>
 	<div class="anadirUsuario">
-		<a th:href="@{/carrito/buy}" class="btn btn-outline-primary">Realizar Pedido</a>
-	</div>	
-
+	<a><button type="submit" class="btn btn-outline-primary">Pagar</button></a>
+	</div>
+	</form>
 	<footer th:replace="fragments/footer.html :: footer" />
 </body>
 </html>

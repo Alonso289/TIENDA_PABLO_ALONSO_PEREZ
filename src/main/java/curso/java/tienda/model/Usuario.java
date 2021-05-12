@@ -18,38 +18,36 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	
-	@Column(name="id_rol")
+
+	@Column(name = "id_rol")
 	private int rol;
-	
-	@NotBlank(message="El email es obligatorio")
+
+	@NotBlank(message = "El email es obligatorio")
 	private String email;
-	
-	@NotBlank(message="La clave es obligatoria")
+
+	@NotBlank(message = "La clave es obligatoria")
 	private String clave;
-	
-	@NotBlank(message="El nombre es obligatorio")
+
+	@NotBlank(message = "El nombre es obligatorio")
 	private String nombre;
-	
-	@NotBlank(message="El apellido1 es obligatorio")
+
+	@NotBlank(message = "El apellido1 es obligatorio")
 	private String apellido1;
-	
-	@NotBlank(message="El apellido2 es obligatorio")
+
+	@NotBlank(message = "El apellido2 es obligatorio")
 	private String apellido2;
-	
-	@NotBlank(message="La direccion es obligatoria")
+
+	@NotBlank(message = "La direccion es obligatoria")
 	private String direccion;
-	
-	@NotBlank(message="La provincia es obligatoria")
+
+	@NotBlank(message = "La provincia es obligatoria")
 	private String provincia;
-	
-	@NotBlank(message="La localidad es obligatoria")
+
+	@NotBlank(message = "La localidad es obligatoria")
 	private String localidad;
-	
-	@Size(min=7, max=15)
+
+	@Size(min = 7, max = 15)
 	private String telefono;
-	
 
 	private String dni;
 
@@ -100,7 +98,7 @@ public class Usuario {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public int getRol() {
 		return rol;
 	}
@@ -188,8 +186,5 @@ public class Usuario {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-
-
-
 
 }

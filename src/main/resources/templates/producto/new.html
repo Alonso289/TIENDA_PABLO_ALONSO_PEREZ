@@ -9,14 +9,14 @@
 <body>
 	<nav th:replace="fragments/navigation.html :: navigation" />
 
-	<form class="form-horizontal"
+	<form enctype="multipart/form-data" class="form-horizontal"
 		th:action="${producto.id !=0} ? @{/producto/edit/submit} : @{/producto/new/submit}"
 		th:object="${producto}" method="post">
 		<fieldset>
 
 			<!-- Form Name -->
 			<legend
-				th:text="${producto.id !=0} ? 'Editar producto' : 'Nuevo producto'">Nuevo
+				th:text="${producto.id !=0} ? 'Datos producto' : 'Nuevo producto'">Nuevo
 				producto / Editar producto</legend>
 
 			<input id="id" name="id" type="hidden" placeholder=""
@@ -45,7 +45,7 @@
 
 				<!-- Text input DESCRIPCION-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="clave">DESCRIPCION</label>
+					<label class="col-md-4 control-label" for="descripcion">Descripción</label>
 					<div class="col-md-4">
 						<input id="descripcion" th:field="*{descripcion}"
 							name="descripcion" type="text" placeholder=""
@@ -85,9 +85,10 @@
 
 				<!-- Text input IMAGEN-->
 				<div class="form-group">
-					<label class="col-md-4 control-label" for="direccion">Imagen</label>
+					<label class="col-md-4 control-label" for="imagen">Imagen</label>
 					<div class="col-md-4">
-						<input id="imagen" th:field="*{imagen}" name="imagen" type="text"
+					<!--  <input th:field="*{imagen}" id="imagen" name="imagen" type="file" required="">-->
+<input id="imagen" th:field="*{imagen}" name="imagen" type="text"
 							placeholder="" class="form-control input-md" required="">
 					</div>
 				</div>

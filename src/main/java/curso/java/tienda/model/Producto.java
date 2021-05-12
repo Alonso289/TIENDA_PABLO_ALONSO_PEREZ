@@ -17,16 +17,15 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private Integer id_categoria;
-	
-	@NotBlank(message="El nombre es obligatorio")
-	private String nombre;
-	
-	@NotBlank(message="El descripcion es obligatorio")
-	private String descripcion;
-	
 
-	private Double precio;	
-	private Integer stock;	
+	@NotBlank(message = "El nombre es obligatorio")
+	private String nombre;
+
+	@NotBlank(message = "El descripcion es obligatorio")
+	private String descripcion;
+
+	private Double precio;
+	private Integer stock;
 	private Date fechaAlta;
 	private Date fechaBaja;
 	private Float impuesto;

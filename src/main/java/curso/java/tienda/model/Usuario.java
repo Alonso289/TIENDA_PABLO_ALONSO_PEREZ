@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 //import javax.persistence.Column;
 
@@ -18,14 +19,14 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	
 	@Column(name="id_rol")
-	@NotBlank(message="El rol es obligatorio")
 	private int rol;
 	
 	@NotBlank(message="El email es obligatorio")
 	private String email;
 	
-	@NotBlank(message="El clave es obligatorio")
+	@NotBlank(message="La clave es obligatoria")
 	private String clave;
 	
 	@NotBlank(message="El nombre es obligatorio")
@@ -37,19 +38,19 @@ public class Usuario {
 	@NotBlank(message="El apellido2 es obligatorio")
 	private String apellido2;
 	
-	@NotBlank(message="El direccion es obligatorio")
+	@NotBlank(message="La direccion es obligatoria")
 	private String direccion;
 	
-	@NotBlank(message="El provincia es obligatorio")
+	@NotBlank(message="La provincia es obligatoria")
 	private String provincia;
 	
-	@NotBlank(message="El nombre es obligatorio")
+	@NotBlank(message="La localidad es obligatoria")
 	private String localidad;
 	
-	@NotBlank(message="El telefono es obligatorio")
+	@Size(min=7, max=15)
 	private String telefono;
 	
-	@NotBlank(message="El dni es obligatorio")
+
 	private String dni;
 
 	public Usuario() {
@@ -67,7 +68,7 @@ public class Usuario {
 		this.localidad = localidad;
 		this.provincia = provincia;
 		this.telefono = telefono;
-		this.dni = dni;
+		this.setDni(dni);
 	}
 
 	public Usuario(int id, int rol, String email, String clave, String nombre, String apellido1, String apellido2,
@@ -83,7 +84,7 @@ public class Usuario {
 		this.localidad = localidad;
 		this.provincia = provincia;
 		this.telefono = telefono;
-		this.dni = dni;
+		this.setDni(dni);
 	}
 
 	public Usuario(String email, String clave, int rol) {
@@ -183,6 +184,11 @@ public class Usuario {
 	public String getDni() {
 		return dni;
 	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
 
 
 

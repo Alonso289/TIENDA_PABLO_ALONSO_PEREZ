@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,14 +60,23 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/usuario/new/submit")
-	public String nuevoSubmit(Model model, @Valid @ModelAttribute Usuario usuario) {
+	public String nuevoSubmit(Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
 	
 		logger.info("ANADIENDO NUEVO USUARIO");
+		if(bindingResult.hasErrors()) {
+			
+			logger.info("NO SE HA PODIDO ANADIR EL USUARIO");
+			model.addAttribute("listaRoles", rs.getListaRoles());
+			return "/usuario/new";			
+		}
+		else {
+			logger.info("USUARIO ANADIDO");
+			us.addUsuario(usuario);	
+			return "redirect:/usuario/list";
+		}	
 		
-		us.addUsuario(usuario);		
 		
-		logger.info("USUARIO ANADIDO");
-		return "redirect:/usuario/list";
+		//return "redirect:/usuario/list";
 	}
 
 	@GetMapping("/del/{id}")
@@ -77,7 +87,7 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/usuario/edit/{id}")
-	public String edit(Model model, @Valid @PathVariable(value = "id") int id) {
+	public String edit(Model model, @PathVariable(value = "id") int id) {
 
 		model.addAttribute("listaRoles", rs.getListaRoles());
 		model.addAttribute("usuario", us.getUsuario(id));
@@ -87,14 +97,24 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/usuario/edit/submit")
-	public String editSubmit(Model model, @Valid @ModelAttribute Usuario usuario) {
+	public String editSubmit(Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
 		
 		logger.info("GUARDANDO USUARIO");
 		
-		us.addUsuario(usuario);		
+		if(bindingResult.hasErrors()) {
+			logger.info("NO SE HA PODIDO GUARDAR EL USUARIO");
+			
+			model.addAttribute("listaRoles", rs.getListaRoles());
+			model.addAttribute("usuario", usuario);
+			return "/usuario/new";
+		}
+		else {
+			logger.info("USUARIO GUARDADO");
+			
+			us.addUsuario(usuario);	
+			return "redirect:/usuario/list";
+		}	
 		
-		logger.info("USUARIO GUARDADO");
-		return "redirect:/usuario/list";
 	}
 	
 	@GetMapping("/usuario/perfil")

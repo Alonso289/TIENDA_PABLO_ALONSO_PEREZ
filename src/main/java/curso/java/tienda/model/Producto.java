@@ -16,7 +16,6 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@NotBlank(message="El id_categoria es obligatorio")
 	private Integer id_categoria;
 	
 	@NotBlank(message="El nombre es obligatorio")
@@ -25,12 +24,9 @@ public class Producto {
 	@NotBlank(message="El descripcion es obligatorio")
 	private String descripcion;
 	
-	@NotBlank(message="El precio es obligatorio")
-	private Double precio;
-	
-	@NotBlank(message="El stock es obligatorio")
-	private Integer stock;
-	
+
+	private Double precio;	
+	private Integer stock;	
 	private Date fechaAlta;
 	private Date fechaBaja;
 	private Float impuesto;

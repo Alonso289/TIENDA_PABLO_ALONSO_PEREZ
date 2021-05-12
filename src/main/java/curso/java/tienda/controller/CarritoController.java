@@ -49,7 +49,7 @@ public class CarritoController {
 	}
 
 	@GetMapping("/carrito/anadir/{id}")
-	public String anadirProducto(HttpSession session, Model model, @Valid @PathVariable("id") int id) {
+	public String anadirProducto(HttpSession session, Model model, @PathVariable("id") int id) {
 
 		logger.info("ANADIENDO PRODUCTO AL CARRITO");
 		ArrayList<Producto> carrito = null;

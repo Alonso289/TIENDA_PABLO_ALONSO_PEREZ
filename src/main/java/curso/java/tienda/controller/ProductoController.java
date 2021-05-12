@@ -67,7 +67,7 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/producto/verProducto/{id}")
-	public String verProducto(Model model, @Valid @PathVariable(value = "id") int id) {
+	public String verProducto(Model model, @PathVariable(value = "id") int id) {
 
 		logger.info("OBTENIENDO PRODUCTO");
 		
@@ -101,7 +101,7 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/producto/edit/{id}")
-	public String edit(Model model, @Valid @PathVariable(value = "id") int id) {
+	public String edit(Model model, @PathVariable(value = "id") int id) {
 		
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
 		model.addAttribute("producto", ps.getProducto(id));	

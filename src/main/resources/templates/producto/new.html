@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nuevo Producto</title>
 <th:block th:include="fragments/head.html"></th:block>
 <link rel="stylesheet" href="/css/registro.css">
@@ -28,6 +29,7 @@
 					<div class="col-md-4">
 						<input id="nombre" th:field="*{nombre}" name="nombre" type="text"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Nombre tiene errores</p>
 					</div>
 				</div>
 
@@ -39,6 +41,7 @@
 							name="id_categoria" type="text" class="form-control">
 							<option th:each="categoria : ${listaCategorias}"
 								th:value="${categoria.id}" th:text="${categoria.nombre}"></option>
+
 						</select>
 					</div>
 				</div>
@@ -50,6 +53,7 @@
 						<input id="descripcion" th:field="*{descripcion}"
 							name="descripcion" type="text" placeholder=""
 							class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Descripcion tiene errores</p>
 					</div>
 				</div>
 
@@ -59,6 +63,7 @@
 					<div class="col-md-4">
 						<input id="precio" th:field="*{precio}" name="precio" type="text"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}">precio tiene errores</p>
 					</div>
 				</div>
 
@@ -68,6 +73,7 @@
 					<div class="col-md-4">
 						<input id="stock" th:field="*{stock}" name="stock" type="text"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}">Stock tiene errores</p>
 					</div>
 				</div>
 			</div>
@@ -80,6 +86,7 @@
 						<input id="impuesto" th:field="*{impuesto}" name="impuesto"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
+							<p th:if="${#fields.hasErrors('impuesto')}" th:errors="*{impuesto}">Impuesto tiene errores</p>
 					</div>
 				</div>
 
@@ -90,6 +97,7 @@
 					<!--  <input th:field="*{imagen}" id="imagen" name="imagen" type="file" required="">-->
 <input id="imagen" th:field="*{imagen}" name="imagen" type="text"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}">Imagen tiene errores</p>
 					</div>
 				</div>
 			</div>

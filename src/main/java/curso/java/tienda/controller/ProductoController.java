@@ -2,6 +2,7 @@ package curso.java.tienda.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import java.io.IOException;
 import java.net.URL;
@@ -95,9 +96,14 @@ public class ProductoController {
 	}
 
 	@PostMapping("/producto/new/submit")
-	public String nuevoSubmit(Model model, @Valid @ModelAttribute Producto producto/*, @RequestParam("file") MultipartFile file*/) {
+	public String nuevoSubmit(Model model, @Valid @ModelAttribute Producto producto, BindingResult bindingResult/*, @RequestParam("file") MultipartFile file*/) {
 
 		logger.info("ANADIENDO NUEVO PRODUCTO");
+		if(bindingResult.hasErrors()) {
+			logger.info("NO SE PUDO ANADIR NUEVO PRODUCTO");
+		
+			return "/producto/new";
+		}else {
 		/*try {
 			if (!file.isEmpty()) {
 				producto.setImagen(file.getOriginalFilename());
@@ -122,6 +128,7 @@ public class ProductoController {
 
 		logger.info("PRODUCTO ANADIDO");
 		return "redirect:/producto/list";
+		}
 	}
 
 	@GetMapping("/producto/edit/{id}")
@@ -135,9 +142,14 @@ public class ProductoController {
 	}
 
 	@PostMapping("/producto/edit/submit")
-	public String editSubmit(Model model, @Valid @ModelAttribute Producto producto/*, @RequestParam("file") MultipartFile file*/) {
+	public String editSubmit(Model model, @Valid @ModelAttribute Producto producto, BindingResult bindingResult/*, @RequestParam("file") MultipartFile file*/) {
 
 		logger.info("GUARDANDO EDICION DE PRODUCTO");
+		if(bindingResult.hasErrors()) {
+			logger.info("NO SE PUDO GUARDAR PRODUCTO");
+		
+			return "/producto/edit";
+		}else {
 		/*try {
 			if (!file.isEmpty()) {
 				producto.setImagen(file.getOriginalFilename());
@@ -161,6 +173,7 @@ public class ProductoController {
 
 		logger.info("PRODUCTO GUARDADO");
 		return "redirect:/producto/list";
+		}
 	}
 
 	@GetMapping("producto/del/{id}")

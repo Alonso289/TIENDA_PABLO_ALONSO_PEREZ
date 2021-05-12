@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -22,7 +23,7 @@ public class Usuario {
 	@Column(name = "id_rol")
 	private int rol;
 
-	@NotBlank(message = "El email es obligatorio")
+	@Email(message="Debe ser una dirección de correo electrónico valida")
 	private String email;
 
 	@NotBlank(message = "La clave es obligatoria")
@@ -45,10 +46,10 @@ public class Usuario {
 
 	@NotBlank(message = "La localidad es obligatoria")
 	private String localidad;
-
-	@Size(min = 7, max = 15)
+	@Size(min = 7, max = 15, message="El teléfono debe tener entre 7 y 15 dígitos")
 	private String telefono;
-
+	
+	@Size(min = 9, max = 9, message="El DNI tener 9 caracteres")
 	private String dni;
 
 	public Usuario() {

@@ -91,16 +91,22 @@ public class LoginController {
 	}
 
 	@PostMapping("/login/registro")
-	public String loginRegistro(Model model, @Valid @ModelAttribute Usuario usuario) {
+	public String loginRegistro(Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
 
 		logger.info("REGISTRANDO USUARIO");
-
-		usuario.setRol(3);
-		us.addUsuario(usuario);
-
-		logger.info("USUARIO REGISTRADO");
-
-		return "redirect:/login";
+		if (!bindingResult.hasErrors()) {
+			
+			usuario.setRol(3);
+			us.addUsuario(usuario);
+			
+			logger.info("USUARIO REGISTRADO");
+			return "redirect:/login";
+		}else {
+			
+			logger.info("USUARIO NO PUDO SER REGISTRADO");
+			return "/usuario/registro";
+		}
+		
 
 	}
 

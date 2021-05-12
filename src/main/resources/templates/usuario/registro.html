@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nuevo usuario</title>
 <th:block th:include="fragments/head.html"></th:block>
 <link rel="stylesheet" href="/css/registro.css">
@@ -31,6 +32,7 @@
 					<div class="col-md-4">
 						<input id="email" th:field="*{email}" name="email" type="text"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email tiene errores</p>
 					</div>
 				</div>
 
@@ -40,6 +42,7 @@
 					<div class="col-md-4">
 						<input id="clave" th:field="*{clave}" name="clave" type="password"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}">Clave tiene errores</p>
 					</div>
 				</div>
 
@@ -49,6 +52,7 @@
 					<div class="col-md-4">
 						<input id="nombre" th:field="*{nombre}" name="nombre" type="text"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Nombre tiene errores</p>
 
 					</div>
 				</div>
@@ -61,6 +65,7 @@
 						<input id="apellido1" th:field="*{apellido1}" name="apellido1"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
+							<p th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}">Apellido1 tiene errores</p>
 					</div>
 				</div>
 
@@ -72,6 +77,7 @@
 						<input id="apelllido2" th:field="*{apellido2}" name="apellido2"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
+							<p th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}">Apellido2 tiene errores</p>
 					</div>
 				</div>
 			</div>
@@ -83,6 +89,7 @@
 						<input id="direccion" th:field="*{direccion}" name="direccion"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
+							<p th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Direccion tiene errores</p>
 					</div>
 				</div>
 
@@ -156,6 +163,7 @@
 						<input id="localidad" th:field="*{localidad}" name="localidad"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
+							<p th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}">Localidad tiene errores</p>
 					</div>
 				</div>
 
@@ -166,6 +174,7 @@
 						<input id="telefono" th:field="*{telefono}" name="telefono"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
+						<p th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Telefono tiene errores</p>
 					</div>
 				</div>
 
@@ -175,6 +184,7 @@
 					<div class="col-md-4">
 						<input id="dni" th:field="*{dni}" name="dni" type="text"
 							placeholder="" class="form-control input-md" required="">
+							<p th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">Clave tiene errores</p>
 
 					</div>
 				</div>

@@ -2,9 +2,12 @@ package curso.java.tienda.service;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import curso.java.tienda.controller.ProductoController;
 import curso.java.tienda.model.Producto;
 import curso.java.tienda.repository.ProductoRepository;
 
@@ -13,6 +16,8 @@ public class ProductoService {
 
 	@Autowired
 	private ProductoRepository productoRepository;
+
+	private static Logger logger = LogManager.getLogger(ProductoController.class);
 
 	public Iterable<Producto> getListaProductos() {
 
@@ -44,5 +49,10 @@ public class ProductoService {
 
 	public void deleteById(int id) {
 		productoRepository.deleteById(id);
+	}
+
+	public Iterable<Producto> getListaProductosPorNombre(String nombre) {
+
+		return productoRepository.findAllByNombre(nombre);
 	}
 }

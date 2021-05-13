@@ -9,53 +9,38 @@
 </head>
 <body>
 	<nav th:replace="fragments/navigation.html :: navigation" />
-	
-	<form class="form-horizontal"
-		th:action="${usuario.id !=0} ? @{/usuario/edit/submit} : @{/usuario/new/submit}"
+
+	<form class="form-horizontal" th:action="@{/usuario/perfil/submit}"
 		th:object="${usuario}" method="post">
 		<fieldset>
 
 			<!-- Form Name -->
-			<legend
-				th:text="${usuario.id !=0} ? 'Editar usuario' : 'Nuevo usuario'">Nuevo
-				usuario / Editar usuario</legend>
+			<legend>Edición Perfil</legend>
 
 			<input id="id" name="id" type="hidden" placeholder=""
 				class="form-control input-md" required="" th:field="*{id}">
+
+			<input id="rol" name="rol" type="hidden" placeholder=""
+				class="form-control input-md" required="" th:field="*{rol}">
 			<div class="datosPrimero">
-				<!-- Text input ROL-->
-				<div class="form-group">
-					<label class="col-md-4 control-label" for="rol">Rol</label>
-					<div class="col-md-4">
-						<select id="rol" th:field="*{rol}" required="" name="rol"
-							type="text" class="form-control">
-							<option th:each="rol : ${listaRoles}" th:value="${rol.id}"
-								th:text="${rol.rol}"></option>
-						</select>
-					</div>
-				</div>
 				<!-- Text input EMAIL-->
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="email">Email</label>
 					<div class="col-md-4">
 						<input id="email" th:field="*{email}" name="email" type="text"
 							placeholder="" class="form-control input-md" required="">
-						<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email tiene errores</p>
+						<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+							tiene errores</p>
 					</div>
 				</div>
 
-<!-- Text input CLAVE hidden-->
-				<input th:if="${usuario.id != 0}" id="clave" name="clave"
-					type="hidden" placeholder="" class="form-control input-md"
-					required="" th:field="*{clave}">					
-
 				<!-- Text input CLAVE-->
-				<div th:if="${usuario.id == 0}" class="form-group">
+				<div class="form-group">
 					<label class="col-md-4 control-label" for="clave">Clave</label>
 					<div class="col-md-4">
 						<input id="clave" th:field="*{clave}" name="clave" type="text"
 							placeholder="" class="form-control input-md" required="">
-						<p th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}">Clave tiene errores</p>
+							<p th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}">Clave tiene errores</p>
 					</div>
 				</div>
 
@@ -65,7 +50,8 @@
 					<div class="col-md-4">
 						<input id="nombre" th:field="*{nombre}" name="nombre" type="text"
 							placeholder="" class="form-control input-md" required="">
-							<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Nombre tiene errores</p>
+						<p th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Nombre
+							tiene errores</p>
 
 					</div>
 				</div>
@@ -78,7 +64,8 @@
 						<input id="apellido1" th:field="*{apellido1}" name="apellido1"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
-						<p th:if="${#fields.hasErrors('apellido1')}" th:errors="*{apellido1}">Apellido1 tiene errores</p>
+						<p th:if="${#fields.hasErrors('apellido1')}"
+							th:errors="*{apellido1}">Apellido1 tiene errores</p>
 					</div>
 				</div>
 
@@ -90,7 +77,8 @@
 						<input id="apelllido2" th:field="*{apellido2}" name="apellido2"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
-						<p th:if="${#fields.hasErrors('apellido2')}" th:errors="*{apellido2}">Apellido tiene errores</p>
+						<p th:if="${#fields.hasErrors('apellido2')}"
+							th:errors="*{apellido2}">Apellido tiene errores</p>
 					</div>
 				</div>
 			</div>
@@ -102,7 +90,8 @@
 						<input id="direccion" th:field="*{direccion}" name="direccion"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
-							<p th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Dirección tiene errores</p>
+						<p th:if="${#fields.hasErrors('direccion')}"
+							th:errors="*{direccion}">Dirección tiene errores</p>
 					</div>
 				</div>
 
@@ -176,7 +165,8 @@
 						<input id="localidad" th:field="*{localidad}" name="localidad"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
-							<p th:if="${#fields.hasErrors('localidad')}" th:errors="*{localidad}">Localidad tiene errores</p>
+						<p th:if="${#fields.hasErrors('localidad')}"
+							th:errors="*{localidad}">Localidad tiene errores</p>
 					</div>
 				</div>
 
@@ -187,7 +177,8 @@
 						<input id="telefono" th:field="*{telefono}" name="telefono"
 							type="text" placeholder="" class="form-control input-md"
 							required="">
-							<p th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Telefono tiene errores</p>
+						<p th:if="${#fields.hasErrors('telefono')}"
+							th:errors="*{telefono}">Telefono tiene errores</p>
 					</div>
 				</div>
 
@@ -197,7 +188,8 @@
 					<div class="col-md-4">
 						<input id="dni" th:field="*{dni}" name="dni" type="text"
 							placeholder="" class="form-control input-md" required="">
-					<p th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">Dni tiene errores</p>
+						<p th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">Dni
+							tiene errores</p>
 					</div>
 				</div>
 			</div>
@@ -205,9 +197,8 @@
 			<div class="form-group" align="right">
 				<label class="col-md-4 control-label" for="singlebutton"></label>
 				<div class="col-md-4">
-					<button th:text="${usuario.id !=0} ? 'Guardar' : 'Crear'"
-						id="singlebutton" name="singlebutton" class="btn btn-primary">Guardar
-						/ Crear</button>
+					<button id="singlebutton" name="singlebutton"
+						class="btn btn-primary">Guardar Cambios</button>
 				</div>
 			</div>
 

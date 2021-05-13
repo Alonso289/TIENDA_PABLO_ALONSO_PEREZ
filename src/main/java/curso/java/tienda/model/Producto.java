@@ -7,12 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "productos")
@@ -23,25 +17,13 @@ public class Producto {
 	private Integer id;
 	private Integer id_categoria;
 
-	@NotBlank(message = "El nombre es obligatorio")
 	private String nombre;
-
-	@NotBlank(message = "La descripción es obligatoria")
 	private String descripcion;
-
-
 	private Double precio;
-
-
-	private Integer stock;
-	
+	private Integer stock;	
 	private Date fechaAlta;
-	private Date fechaBaja;
-	
-
-	private Float impuesto;
-	
-	@NotBlank(message = "La imagen es obligatoria")
+	private Date fechaBaja;	
+	private Float impuesto;	
 	private String imagen;
 
 	public Producto() {

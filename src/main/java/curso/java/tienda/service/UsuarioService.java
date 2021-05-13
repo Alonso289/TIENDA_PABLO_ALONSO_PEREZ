@@ -3,7 +3,6 @@ package curso.java.tienda.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.repository.UsuarioRepository;
 
@@ -60,6 +59,7 @@ public class UsuarioService {
 
 	}
 
+	//VALIDA EL LOGIN
 	public boolean validaLogin(String email, String clave) {
 
 		Usuario usuario = getUsuario(email);
@@ -73,7 +73,7 @@ public class UsuarioService {
 
 	// COMPRUEBA CREDENCIALES DE UN USUARIO
 	public static boolean compruebaCredenciales(Usuario usuario, String claveIntro) {
-		// ENCRIPTA LAS PASS
+		// ENCRIPTA LAS PASSWORD
 		Base64 base64 = new Base64();
 		claveIntro = new String(base64.encode(claveIntro.getBytes()));
 		boolean correcto = false;

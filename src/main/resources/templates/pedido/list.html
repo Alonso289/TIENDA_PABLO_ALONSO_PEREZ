@@ -41,7 +41,7 @@
 			<td th:if="${pedido.estado != 'Enviado'}">
 				<a th:href="@{/pedido/enviar/} + ${pedido.id}" th:text="'Enviar'" method="get"></a>	
 			</td>
-			<td th:if="${ session.usuario.rol == 1 && pedido.estado != 'Cancelado'}">
+			<td th:if="${ session.usuario.rol == 1 && pedido.estado != 'Cancelado' }">
 				<a th:href="@{/pedido/cancelar/} + ${pedido.id}" th:text="'Cancelar'" method="get"></a>	
 			</td>	
 		</tr>
@@ -66,7 +66,7 @@
 				<td th:text="${pedido.numFactura}">Numero Factura</td>
 				<td th:text="${pedido.total} + ' €'">Total Pedido</td>
 				<td><a class="btn btn-outline-primary" th:href="@{/pedido/listDetalle/} + ${pedido.id}" th:text="'Ver Detalle'" method="get"></a></td>
-				<td th:if="${pedido.estado != 'Pendiente Cancelar'}">
+				<td th:if="${pedido.estado != 'Pendiente Cancelar' && pedido.estado != 'Cancelado'}">
 				<a th:href="@{/pedido/cancelar/} + ${pedido.id}" th:text="'Cancelar'" method="get"></a>	
 				</td>	
 			</div>

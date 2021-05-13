@@ -25,5 +25,10 @@ public class DetallePedidoService {
 	public DetallePedido getDetallePedidoById(int id) {
 		return detallePedidoRepository.findById(id);
 	}
+	
+	public void deleteDetalle(int idDetalle) {
+		
+		detallePedidoRepository.deleteById(idDetalle);
+	}
 
 }

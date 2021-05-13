@@ -32,7 +32,7 @@
   <p class="title" th:text="'Provincia: ' + ${session.usuario.provincia}">Provincia:</p>
   <p class="title" th:text="'Telefono: ' + ${session.usuario.telefono}">Teléfono:</p>
   <p class="title" th:text="'DNI: ' + ${session.usuario.dni}">DNI:</p>
-  <a th:href="@{/}"><button>Inicio</button></a>
+  <a th:href="@{/usuario/perfil/modificar}"><button>Modificar</button></a>
 </div>
 	<footer th:replace="fragments/footer.html :: footer" />
 </body>

@@ -43,6 +43,13 @@
 						class="nav-link" th:href="@{/close}">Cerrar Sesión</a></li>
 				</ul>
 				
+				<form class="d-flex" th:action="@{/busqueda/nombre}" method="get">
+			        <input class="form-control me-2"  type="search" placeholder="Buscar por Nombre" aria-label="Search" name="buscar">
+			        <button class="btn btn-outline-success" type="submit">Buscar</button>
+	      		</form>
+	      		<form class="d-flex" th:action="@{/}" method="get">
+	      		<button class="btn btn-outline-danger" type="submit">Reset</button>
+	      		</form>
 			</div>
 		</div>
 	</nav>

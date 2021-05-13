@@ -26,6 +26,7 @@
 			<td th:text="${detalle.unidades}">Unidades</td>
 			<td th:text="${detalle.impuesto}">Impuesto</td>
 			<td th:text="${detalle.Total} + ' €'">Total</td>
+			<td th:if="${pedido.estado == 'Pendiente'}"><a th:href="@{/pedido/del/detalle/} + ${detalle.id} + '/' + ${pedido.id}" th:text="'Eliminar'" method="get" class="btn btn-outline-danger"></a></td>
 		</tr>
 		
 		

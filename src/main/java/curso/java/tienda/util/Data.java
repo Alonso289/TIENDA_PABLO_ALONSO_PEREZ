@@ -13,6 +13,7 @@ import curso.java.tienda.service.UsuarioService;
 
 public class Data {
 
+	//DATOS SIMPLONES DE PRUEBA
 	private static ArrayList<Usuario> listaUsuarios() {
 		ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
 		listaUsuarios.add(new Usuario("user2@tienda.es", "1234", 2));
@@ -23,7 +24,7 @@ public class Data {
 	private static ArrayList<Producto> listaProductos() {
 		ArrayList<Producto> listaProductos = new ArrayList<Producto>();
 		listaProductos.add(new Producto(null, "producto1",
-				"descripcion producto 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+				"descripcion producto 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 				null, 1, null, null, null, "producto1.jpg"));
 		listaProductos.add(
 				new Producto(1, "producto2", "descripcion producto 2", 50.5, 1, null, null, null, "producto1.jpg"));

@@ -94,10 +94,11 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label" for="imagen">Imagen</label>
 					<div class="col-md-4">
-					<!--  <input th:field="*{imagen}" id="imagen" name="imagen" type="file" required="">-->
-<input id="imagen" th:field="*{imagen}" name="imagen" type="text"
-							placeholder="" class="form-control input-md" required="">
-							<p th:if="${#fields.hasErrors('imagen')}" th:errors="*{imagen}">Imagen tiene errores</p>
+					<input th:field="*{imagen}" id="imagen" name="imagen" type="file" required="">
+					
+					<!--<input id="imagen" th:field="*{imagen}" name="imagen" type="text"
+							placeholder="" class="form-control input-md" required="">-->
+							
 					</div>
 				</div>
 			</div>

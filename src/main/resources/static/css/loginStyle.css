@@ -110,5 +110,9 @@ body {
 div.contenedor {
   width: 100%;
   display: flex;
-  justify-content: center
+  justify-content: center;
+}
+
+p{
+	color:#FF0000;
 }

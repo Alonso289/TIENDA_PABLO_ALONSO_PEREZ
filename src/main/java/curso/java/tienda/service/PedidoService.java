@@ -20,6 +20,8 @@ public class PedidoService {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private DetallePedidoService dps;
+	
+	private static final int CLIENTE_ROL = 3;
 
 	public void addPedido(Pedido pedido) {
 
@@ -74,7 +76,7 @@ public class PedidoService {
 
 		pedido.setEstado("Enviado");
 		
-		//Obtenemos un numero incremental para la factura
+		//Obtenemos un numero para la factura
 		Calendar c = new GregorianCalendar();
 		String dia = Integer.toString(c.get(Calendar.DATE));
 		String mes = Integer.toString(c.get(Calendar.MONTH));
@@ -87,7 +89,7 @@ public class PedidoService {
 	
 	public void pedidoCancelar(Pedido pedido, int rol) {
 
-		if(rol==3)
+		if(rol == CLIENTE_ROL)
 			pedido.setEstado("Pendiente Cancelar");
 		else
 			pedido.setEstado("Cancelado");

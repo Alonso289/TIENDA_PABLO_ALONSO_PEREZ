@@ -12,11 +12,12 @@
 	rel="stylesheet">
 </head>
 <body>
-	<nav th:replace="fragments/navigation.html :: navigation" />
+	<nav th:replace="fragments/navigationIndex.html :: navigation" />
 	<div class="wrap">
 		<h1>Catálogo Productos</h1>
 		<div class="store-wrapper">
 			<div class="category_list" th:each="categoria : ${listaCategorias}">
+			
 				<a type="button" class="category_item" th:text="${categoria.nombre}">Categoria</a>
 				<section class="products-list">
 					<div th:each="producto : ${listaProductos}" th:if="${categoria.id == producto.id_categoria}" class="product-item">

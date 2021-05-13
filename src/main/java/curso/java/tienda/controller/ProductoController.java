@@ -44,9 +44,12 @@ public class ProductoController {
 
 	private static Logger logger = LogManager.getLogger(ProductoController.class);
 
+	
+	//MUESTRA LA PAGINA DE INICIO CON EL CATALOGO DE PRODUCTOS POR CATEGORIA
 	@GetMapping("")
 	public String index(HttpSession session, Model model) {
-		// Carga de datos inicial
+		
+		// CARGA DATOS DE PRUEBA SIMPLONES
 		// Data.cargaDatos(us, ps);
 
 		if (session.getAttribute("carrito") == null) {
@@ -54,6 +57,7 @@ public class ProductoController {
 			session.setAttribute("carrito", carrito);
 		}
 
+		//ASIGNA DATOS AL MODELO PARA MOSTRARLOS EN LA VISTA
 		model.addAttribute("listaProductos", ps.getListaProductos());
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
 
@@ -61,11 +65,13 @@ public class ProductoController {
 		return "index";
 	}
 
+	//MUESTA LA VISTA DE LISTADO DE PRODUCTOS (NO ES EL CATALOGO)
 	@GetMapping("/producto/list")
 	public String listaProducto(Model model) {
 
 		logger.info("OBTENIENDO LA LISTA DE PRODUCTOS");
 
+		//ASIGNA DATOS AL MODELO PARA MOSTRALOS EN LA VISTA
 		model.addAttribute("listaProductos", ps.getListaProductos());
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
 
@@ -73,11 +79,13 @@ public class ProductoController {
 		return "/producto/list";
 	}
 
+	//MUESTRA UN PRODUCTO EN CONCRETO
 	@GetMapping("/producto/verProducto/{id}")
 	public String verProducto(Model model, @PathVariable(value = "id") int id) {
 
 		logger.info("OBTENIENDO PRODUCTO");
-
+		
+		//ASIGNA DATOS AL MODELO PARA MOSTRAR EN LA VISTA
 		model.addAttribute("producto", ps.getProducto(id));
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
 
@@ -85,9 +93,11 @@ public class ProductoController {
 		return "/producto/verProducto";
 	}
 
+	//MUESTRA EL FORMULARIO PARA CREAR UN NUEVO PRODUCTO
 	@GetMapping("/producto/new")
 	public String nuevo(Model model) {
 
+		//ASIGNA DATOS AL MODELO PARA MOSTRAR EN LA VISTA
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
 		model.addAttribute("producto", new Producto());
 
@@ -95,16 +105,15 @@ public class ProductoController {
 		return "/producto/new";
 	}
 
+	//ANADE EL PRODUCTO
 	@PostMapping("/producto/new/submit")
-	public String nuevoSubmit(Model model, @Valid @ModelAttribute Producto producto, BindingResult bindingResult/*, @RequestParam("file") MultipartFile file*/) {
+	public String nuevoSubmit(Model model, @Valid @ModelAttribute Producto producto,
+			@RequestParam("imagen") MultipartFile file) {
 
 		logger.info("ANADIENDO NUEVO PRODUCTO");
-		if(bindingResult.hasErrors()) {
-			logger.info("NO SE PUDO ANADIR NUEVO PRODUCTO");
-		
-			return "/producto/new";
-		}else {
-		/*try {
+
+		//OBTIENE LA IMAGEN SELECCIONADA Y LA GUARDA
+		try {
 			if (!file.isEmpty()) {
 				producto.setImagen(file.getOriginalFilename());
 
@@ -123,17 +132,19 @@ public class ProductoController {
 			System.out.println(e);
 
 		}
-*/
+
 		ps.addProducto(producto);
 
 		logger.info("PRODUCTO ANADIDO");
 		return "redirect:/producto/list";
-		}
-	}
 
+	}
+	
+	//MUESTRA EL FORMULARIO DE EDICION DEL PRODUCTO
 	@GetMapping("/producto/edit/{id}")
 	public String edit(Model model, @PathVariable(value = "id") int id) {
 
+		//ASIGNA DATOS AL MODELO PARA MOSTRARLOS EN LA VISTA
 		model.addAttribute("listaCategorias", cs.getListaCategorias());
 		model.addAttribute("producto", ps.getProducto(id));
 
@@ -141,16 +152,15 @@ public class ProductoController {
 		return "/producto/new";
 	}
 
+	//GUARDA EL PRODUCTO EDITADO
 	@PostMapping("/producto/edit/submit")
-	public String editSubmit(Model model, @Valid @ModelAttribute Producto producto, BindingResult bindingResult/*, @RequestParam("file") MultipartFile file*/) {
+	public String editSubmit(Model model, @Valid @ModelAttribute Producto producto, BindingResult bindingResult,
+			@RequestParam("imagen") MultipartFile file) {
 
 		logger.info("GUARDANDO EDICION DE PRODUCTO");
-		if(bindingResult.hasErrors()) {
-			logger.info("NO SE PUDO GUARDAR PRODUCTO");
 		
-			return "/producto/edit";
-		}else {
-		/*try {
+		//OBTIENE LA IMAGEN SELECCIONADA Y LA GUARDA
+		try {
 			if (!file.isEmpty()) {
 				producto.setImagen(file.getOriginalFilename());
 
@@ -168,16 +178,17 @@ public class ProductoController {
 		} catch (IOException e) {
 			System.out.println(e);
 
-		}*/
+		}
 		ps.addProducto(producto);
 
 		logger.info("PRODUCTO GUARDADO");
 		return "redirect:/producto/list";
-		}
+
 	}
 
+	//ELIMINA EL PRODUCTO
 	@GetMapping("producto/del/{id}")
-	public String eliminarUsuario(@PathVariable("id") int id, Model model) {
+	public String eliminarProducto(@PathVariable("id") int id, Model model) {
 
 		logger.info("ELIMINANDO PRODUCTO");
 
@@ -186,5 +197,19 @@ public class ProductoController {
 		logger.info("PRODUCTO ELIMINADO");
 		return "redirect:/producto/list";
 	}
+	
+	//BUSQUEDA POR NOMBRE
+	
+	@GetMapping("/busqueda/nombre")
+	public String buscarNombre(@RequestParam(required = true) String buscar, Model model) {
 
+		logger.info("BUSQUEDA POR NOMBRE PRODUCTO");
+
+		//ASIGNA DATOS AL MODELO PARA MOSTRARLOS EN LA VISTA
+		model.addAttribute("listaProductos", ps.getListaProductosPorNombre(buscar));
+		model.addAttribute("listaCategorias", cs.getListaCategorias());
+		
+		logger.info("BUSQUEDA REALIZADA");
+		return "index";
+	}
 }

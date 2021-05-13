@@ -34,16 +34,22 @@ public class LoginController {
 	private OpcionesMenuService oms;
 
 	private static Logger logger = LogManager.getLogger(CarritoController.class);
+	
+	private static final String MENSAJE = "Usuario o Contraseña Incorrectos";
 
+	private static final int ROL_CLIENTE = 3;
+	//MUESTRA EL LOGIN
 	@GetMapping("/login")
 	public String login(Model model) {
 
+		model.addAttribute("mensaje", "");
 		logger.info("MOSTRANDO VISTA DEL LOGIN");
 		return "/login/login";
 	}
 
+	//VALIDA LAS CREDENCIALES INTRODUCIDAS EN EL LOGIN
 	@PostMapping("/login/acceso/valida")
-	public String validaAcceso(HttpSession session, Model model, @Valid @RequestParam(required = true) String email,
+	public String validaLogin(HttpSession session, Model model, @Valid @RequestParam(required = true) String email,
 			@RequestParam(required = true) String clave) {
 
 		logger.info("VALIDANDO LOGIN");
@@ -74,10 +80,13 @@ public class LoginController {
 			
 		} else {
 			logger.info("LOGIN NO VALIDO");
-			return "redirect:/login";
+			model.addAttribute("mensaje", MENSAJE);
+			
+			return "/login/login";
 		}
 	}
 
+	//MUESTRA LA VISTA DEL REGISTRO DE LA APLICACION
 	@GetMapping("/login/registrar")
 	public String loginRegistrar(Model model) {
 
@@ -90,13 +99,16 @@ public class LoginController {
 
 	}
 
+	//REALIZA EL REGISTRO DEL NUEVO USUARIO
 	@PostMapping("/login/registro")
 	public String loginRegistro(Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
 
+		
+		//NUEVO USUARIO TIENE ROL CLIENTE POR DEFECTO
 		logger.info("REGISTRANDO USUARIO");
 		if (!bindingResult.hasErrors()) {
 			
-			usuario.setRol(3);
+			usuario.setRol(ROL_CLIENTE);
 			us.addUsuario(usuario);
 			
 			logger.info("USUARIO REGISTRADO");
@@ -110,8 +122,9 @@ public class LoginController {
 
 	}
 
+	//CIERRA LA SESION ACTUAL Y REDIRECCIONA A LA PAGINA DE INICIO
 	@GetMapping("/close")
-	public String cerrarSesion(HttpSession session, Model model) {
+	public String cerrarSession(HttpSession session, Model model) {
 
 		logger.info("CERRANDO SESSION");
 		session.invalidate();

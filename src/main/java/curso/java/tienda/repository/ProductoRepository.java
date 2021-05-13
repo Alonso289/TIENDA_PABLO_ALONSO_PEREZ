@@ -9,4 +9,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 	Producto findById(int id);
 
 	Producto findByNombre(String nombre);
+
+	Iterable<Producto> findAllByNombre(String nombre);
+
 }

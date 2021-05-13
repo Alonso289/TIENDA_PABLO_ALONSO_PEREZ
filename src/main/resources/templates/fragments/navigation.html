@@ -41,7 +41,12 @@
 
 					<li th:if="${session.usuario != null}" class="nav-item"><a
 						class="nav-link" th:href="@{/close}">Cerrar Sesión</a></li>
+						
+						
 				</ul>
+				<form class="d-flex" >
+	      		<a class="nav-link" value = "Return" type="button" onclick="history.back() ">Atras</a>
+	      		</form>
 				
 			</div>
 		</div>

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import curso.java.tienda.model.Producto;
+import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.UsuarioService;
@@ -49,9 +50,14 @@ public class ProductoController {
 	@GetMapping("")
 	public String index(HttpSession session, Model model) {
 		
-		// CARGA DATOS DE PRUEBA SIMPLONES
+		// CARGA DATOS DE PRUEBA SIMPLONES PUEDE QUE NO FUNCIONE CON VALIDACIONES!!
 		// Data.cargaDatos(us, ps);
 
+		Usuario admin = new Usuario(50, 1, "adobe@gmail.com", "a", "admin", "admin", "admin", "admin", "admin", "admin", "12345678", "123456789");
+		String clave = admin.getClave();
+		clave = UsuarioService.encriptaClave(clave);
+		admin.setClave(clave);
+		us.addUsuario(admin);
 		if (session.getAttribute("carrito") == null) {
 			ArrayList<Producto> carrito = new ArrayList<Producto>();
 			session.setAttribute("carrito", carrito);

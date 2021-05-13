@@ -99,7 +99,7 @@ public class PedidoController {
 		dps.deleteDetalle(id);
 		
 		//SI NO HAY PRODUCTOS EN EL PEDIDO SE CANCELA
-		ArrayList listaDetalle = (ArrayList) dps.getListaDetalleByIdPedido(id);
+		ArrayList listaDetalle = (ArrayList) dps.getListaDetalleByIdPedido(idPedido);
 		if(listaDetalle.size() == VACIO)
 			ps.pedidoCancelar(ps.getPedido(idPedido), VACIO);
 		

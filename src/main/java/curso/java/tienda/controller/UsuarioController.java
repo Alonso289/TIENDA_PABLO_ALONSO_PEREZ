@@ -80,6 +80,11 @@ public class UsuarioController {
 			return "/usuario/new";
 		} else {
 			logger.info("USUARIO ANADIDO");
+			
+			//ENCRIPTADO DE CLAVE
+			String clave = usuario.getClave();
+			clave = UsuarioService.encriptaClave(clave);
+			usuario.setClave(clave);
 			us.addUsuario(usuario);
 			return "redirect:/usuario/list";
 		}
@@ -132,9 +137,10 @@ public class UsuarioController {
 
 	//MUESTRA LA VISTA DEL PERFIL
 	@GetMapping("/usuario/perfil")
-	public String perfil(Model model) {
+	public String perfil(HttpSession session, Model model) {
 
 		logger.info("MOSTRANDO PERFIL DEL USUARIO");
+	
 		return "/usuario/perfil";
 	}
 	
@@ -144,7 +150,12 @@ public class UsuarioController {
 
 		logger.info("MOSTRANDO EDICION DEL PERFIL DEL USUARIO");
 		
-		model.addAttribute(session.getAttribute("usuario"));
+		//DESENCRIPTA LA CLAVE PARA LA VISUALIZACION DEL USUARIO
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		String clave = UsuarioService.desencriptaClave(usuario.getClave());
+		usuario.setClave(clave);
+
+		model.addAttribute(usuario);
 		return "/usuario/editarPerfil";
 	}
 	
@@ -162,8 +173,12 @@ public class UsuarioController {
 		} else {
 			
 			logger.info("USUARIO GUARDADO");
-
+			
+			//ENCRIPTA LA CLAVE
+			String clave = UsuarioService.encriptaClave(usuario.getClave());			
+			usuario.setClave(clave);
 			us.addUsuario(usuario);
+			
 			session.setAttribute("usuario", usuario);
 			return "redirect:/usuario/perfil";
 		}

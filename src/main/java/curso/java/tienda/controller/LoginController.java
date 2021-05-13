@@ -104,11 +104,19 @@ public class LoginController {
 	public String loginRegistro(Model model, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
 
 		
-		//NUEVO USUARIO TIENE ROL CLIENTE POR DEFECTO
+		
 		logger.info("REGISTRANDO USUARIO");
 		if (!bindingResult.hasErrors()) {
 			
+			//NUEVO USUARIO TIENE ROL CLIENTE POR DEFECTO
 			usuario.setRol(ROL_CLIENTE);
+			
+			//ENCRIPTADO DE CLAVE
+			String clave = usuario.getClave();
+			clave = UsuarioService.encriptaClave(clave);
+			usuario.setClave(clave);
+			
+			
 			us.addUsuario(usuario);
 			
 			logger.info("USUARIO REGISTRADO");

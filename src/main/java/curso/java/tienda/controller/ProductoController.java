@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import curso.java.tienda.model.DetallePedido;
 import curso.java.tienda.model.Producto;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.CategoriaService;
+import curso.java.tienda.service.DetallePedidoService;
 import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.UsuarioService;
 import curso.java.tienda.util.Data;
@@ -42,6 +44,8 @@ public class ProductoController {
 	private ProductoService ps;
 	@Autowired
 	private UsuarioService us;
+	@Autowired
+	private DetallePedidoService dps;
 
 	private static Logger logger = LogManager.getLogger(ProductoController.class);
 
@@ -50,14 +54,20 @@ public class ProductoController {
 	@GetMapping("")
 	public String index(HttpSession session, Model model) {
 		
-		// CARGA DATOS DE PRUEBA SIMPLONES PUEDE QUE NO FUNCIONE CON VALIDACIONES!!
+		// CARGA DATOS DE PRUEBA SIMPLONES NO FUNCIONARA CON VALIDACIONES!!
+		//NO DESCOMENTAR CON VALIDACIONES DEL MODELO ACTIVAS
+		//COMPROBAR LOS DATOS ANTES DE DESCOMENTAR
 		// Data.cargaDatos(us, ps);
 
-		Usuario admin = new Usuario(50, 1, "adobe@gmail.com", "a", "admin", "admin", "admin", "admin", "admin", "admin", "12345678", "123456789");
-		String clave = admin.getClave();
-		clave = UsuarioService.encriptaClave(clave);
-		admin.setClave(clave);
-		us.addUsuario(admin);
+		//CREACION DE USUARIO ADMIN SI NO EXISTE
+		if(us.getByNombre("admin") == null) {
+			Usuario admin = new Usuario(1, 1, "admin@gmail.com", "1234", "admin", "admin", "admin", "admin", "admin", "admin", "12345678", "123456789");
+			String clave = admin.getClave();
+			clave = UsuarioService.encriptaClave(clave);
+			admin.setClave(clave);
+			us.addUsuario(admin);
+		}
+		
 		if (session.getAttribute("carrito") == null) {
 			ArrayList<Producto> carrito = new ArrayList<Producto>();
 			session.setAttribute("carrito", carrito);
@@ -194,10 +204,23 @@ public class ProductoController {
 
 	//ELIMINA EL PRODUCTO
 	@GetMapping("producto/del/{id}")
-	public String eliminarProducto(@PathVariable("id") int id, Model model) {
+	public String eliminarProducto(HttpSession session, @PathVariable("id") int id, Model model) {
 
 		logger.info("ELIMINANDO PRODUCTO");
 
+		//ELIMINANDO EL PRODUCTO DEL CARRITO PRIMERO
+		ArrayList<Producto> listaCarrito = (ArrayList<Producto>) session.getAttribute("carrito");
+		
+		for(int i=0; i<listaCarrito.size(); i++) {
+			
+			if(listaCarrito.get(i).getId() == id)
+				listaCarrito.remove(i);
+		}
+		
+		//ELIMINANDO EL PRODUCTO DEL DETALLE DE CUALQUIER PEDIDO
+		dps.deleteAllDetalleProducto(id);
+			
+		//ELIMINADO EL PRODUCTO
 		ps.deleteById(id);
 
 		logger.info("PRODUCTO ELIMINADO");
@@ -218,4 +241,6 @@ public class ProductoController {
 		logger.info("BUSQUEDA REALIZADA");
 		return "index";
 	}
+	
+
 }

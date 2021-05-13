@@ -1,5 +1,7 @@
 package curso.java.tienda.repository;
 
+
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import curso.java.tienda.model.DetallePedido;
@@ -9,4 +11,6 @@ public interface DetallePedidoRepository extends JpaRepository<DetallePedido, In
 	Iterable<DetallePedido> findByIdPedido(int id);
 
 	DetallePedido findById(int id);
+
+	Iterable<DetallePedido> findByIdProducto(int id);
 }

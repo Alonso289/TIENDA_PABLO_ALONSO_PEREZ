@@ -97,4 +97,24 @@ public class PedidoService {
 		addPedido(pedido);
 
 	}
+
+	public void deleteById(int id) {
+		pedidoRepository.deleteById(id);
+	}
+
+	//ELIMINA LOS PEDIDOS RELACINADOS CON EL USUARIO A ELIMINAR
+	public void deletePedido(int id) {
+		
+		ArrayList<Pedido> listaPedidos = (ArrayList<Pedido>) pedidoRepository.findByIdUsuario(id);
+		
+		for(int i=0; i<listaPedidos.size();i++) {
+			
+			Pedido pedido = listaPedidos.get(i);
+			pedidoRepository.deleteById(pedido.getId());
+			
+			dps.deleteAllDetalleUsuario(pedido.getId());
+			
+		}
+		
+	}
 }

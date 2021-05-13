@@ -1,5 +1,6 @@
 package curso.java.tienda.controller;
 
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import curso.java.tienda.model.Usuario;
+import curso.java.tienda.service.DetallePedidoService;
+import curso.java.tienda.service.PedidoService;
 import curso.java.tienda.service.RolService;
 import curso.java.tienda.service.UsuarioService;
 
@@ -27,6 +30,8 @@ public class UsuarioController {
 	private UsuarioService us;
 	@Autowired
 	private RolService rs;
+	@Autowired
+	private PedidoService pedidoService;
 
 	private static Logger logger = LogManager.getLogger(UsuarioController.class);
 	
@@ -96,6 +101,9 @@ public class UsuarioController {
 	@GetMapping("/del/{id}")
 	public String eliminarUsuario(@PathVariable("id") int id, Model model) {
 
+		//ELIMINACION EN CASCADA MANUAL PARA EVITAR LA VISUALIZACION VACIA EN LAS LISTAS
+		pedidoService.deletePedido(id);
+		
 		us.deleteById(id);
 		return "redirect:/usuario/list";
 	}
@@ -159,7 +167,7 @@ public class UsuarioController {
 		return "/usuario/editarPerfil";
 	}
 	
-	//Guarda cambios
+	//GUARDA CAMBIOS DEL PERFIL
 	@PostMapping("/usuario/perfil/submit")
 	public String guardarCambios(Model model, HttpSession session, @Valid @ModelAttribute Usuario usuario, BindingResult bindingResult) {
 

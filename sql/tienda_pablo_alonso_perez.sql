@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `tienda_pablo_alonso_perez`
 --
+CREATE DATABASE `tienda_pablo_alonso_perez` CHARACTER SET utf8mb4;
+USE `tienda_pablo_alonso_perez`;
 
 -- --------------------------------------------------------
 
